@@ -1,0 +1,31 @@
+User
+	name
+	email
+	password
+
+Beer
+	brand
+	name
+	degree
+	packaging
+
+Events
+	date
+	name
+	participants
+
+Review
+	logo
+	aroma
+	foam
+	color
+	bitterness
+	sweetness
+	note
+	again
+	overall_rating
+	final_rating
+	date
+	participants
+	signature
+

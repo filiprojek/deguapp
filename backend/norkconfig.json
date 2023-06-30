@@ -1,0 +1,12 @@
+{
+  "project_name": "deguapp",
+  "lang": "ts",
+  "author": "Filip Rojek",
+  "database": {
+    "db": "mongodb",
+    "orm": "mongoose"
+  },
+  "website": "http://filiprojek.cz/",
+  "email": "filip@filiprojek.cz",
+  "version": "3.0.5"
+}

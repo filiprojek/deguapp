@@ -1,0 +1,11 @@
+.form_add {
+	display: flex;
+	flex-direction: column;
+
+}
+
+.form_group_label {
+	display: flex;
+	flex-direction: column;
+}
+

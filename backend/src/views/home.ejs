@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Project</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+        .content {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: space-between;
+            padding-top: 5rem;
+            flex-direction: column;
+        }
+        footer, .welcome {
+            display: flex;
+            justify-content: center;
+        }
+        .welcome {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        img {
+            width: 200px;
+            padding-top: 2rem;
+        }
+        footer {
+            padding-bottom: 2rem;
+            text-align: center;
+        }
+        .logos {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="welcome">
+            <h1>Let's make something amazing!</h1>
+            <div class="logos">
+                <img src="/nodejs_logo.svg" alt="node.js logo">
+                <img src="/expressjs.png" alt="express.js logo">
+            </div>
+        </div>
+        <footer>
+            <div class="author">
+                <p>Made by </p><a href="http://www.filiprojek.cz">filiprojek.cz</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
