@@ -7,16 +7,16 @@
 <form class="form_add">
 	<div class=form_group>
 		<div class=form_group_label>
-			<label for="brand">Značka:</label>
-			<input type="text" name="brand" id="brand" enable>
-		</div>
-		<div class=form_group_label>
-			<label for="name">Název:</label>
+			<label for="name">Název, značka:</label>
 			<input type="text" name="name" id="name" enable>
 		</div>
 		<div class=form_group_label>
 			<label for="degree">Stupeň:</label>
 			<input type="text" name="degree" id="degree" enable>
+		</div>
+		<div class=form_group_label>
+			<label for="percentage">Procento:</label>
+			<input type="text" name="percentage" id="percentage" enable>
 		</div>
 	</div>
 
@@ -26,7 +26,9 @@
 			<select id="packaging" name="packaging" enable>
 				<option value="1">Plech</option>
 				<option value="2">Sklo</option>
-				<option value="3">Jiné</option>
+				<option value="3">Sud</option>
+				<option value="4">Tank</option>
+				<option value="5">Jiné</option>
 			</select>
 		</div>
 	</div>
@@ -38,7 +40,7 @@
 	<div class="form_group">
 		<div class=form_group_label>
 			<label for="photo">Foto:</label>
-			<input type="file" name="image" id="image" enable>
+			<input type="file" name="photo" id="photo" enable>
 		</div>
 	</div>
 

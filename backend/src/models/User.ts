@@ -17,20 +17,6 @@ const schema = new Schema(
 			type: String,
 			required: true
 		},
-		domains: [
-			{
-				role: Number,
-				domain_id: String
-			}
-		],
-		verification_code: {
-			type: Number,
-			length: 6
-		},
-		verified: {
-			type: Boolean,
-			default: false
-		}
 	},
 	{
 		timestamps: true

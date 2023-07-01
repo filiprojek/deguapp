@@ -3,25 +3,29 @@ import path from 'path'
 
 const schema = new Schema<any>(
 	{
-		brand: {
-			type: String,
-			required: true,
-		},
 		name: {
 			type: String,
-			required: true,
+			required: true
 		},
 		degree: {
-			type: String,
+			type: Number,
 			required: true,
+		},
+		percentage: {
+			type: Number,
+			required: true
 		},
 		packaging: {
 			type: Number,
-			required: true,
+			required: true
 		},
 		note: {
 			type: String,
 			required: false
+		},
+		photo: {
+			type: Array,
+			required: false,
 		}
 	},
 	{
@@ -30,3 +34,4 @@ const schema = new Schema<any>(
 )
 
 export default model(path.basename(__filename).split('.')[0], schema)
+

@@ -9,16 +9,18 @@
 		<div class=form_group_label>
 			<label for="user">Uživatel:</label>
 			<select id="user" name="user" enable>
-				<option value="">Dž</option>
-				<option value="">Dý Ej En</option>
-				<option value="">frfr</option>
+				<option value="649f42f62b93542c8a465526">Dž</option>
+				<option value="649f43182b93542c8a465528">Dý Ej En</option>
+				<option value="649f42c32b93542c8a465524">frfr</option>
+				<option value="649f43332b93542c8a46552a">Pch</option>
+				<option value="649f46072b93542c8a46552f">Sš</option>
 			</select>
 		</div>
 	</div>
 	<div class=form_group>
 		<div class=form_group_label>
 			<label for="beer">Beer:</label>
-			<select name="beer" id="beer">
+			<select name="beer_id" id="beer_id">
 			</select>
 		</div>
 	</div>
@@ -90,7 +92,13 @@
 
 		<div class=form_group_label>
 			<label for="attendedts">S kým:</label>
-			<input type="text" name="attendedts" id="attendents" enable>
+			<select id="attendedts" name="attendedts" multiple size="3" enable>
+				<option value="649f42f62b93542c8a465526">Dž</option>
+				<option value="649f43182b93542c8a465528">Dý Ej En</option>
+				<option value="649f42c32b93542c8a465524">frfr</option>
+				<option value="649f43332b93542c8a46552a">Pch</option>
+				<option value="649f46072b93542c8a46552f">Sš</option>
+			</select>
 		</div>
 
 		<div class=form_group_label>
@@ -170,10 +178,11 @@
 		}
 		return pckgs[id_pckg]
 	}
+
 	(async() => {
 		// get beers and fill form data
 		const beerData = await getBeers()
-		const beer = document.querySelector('#beer')
+		const beer = document.querySelector('#beer_id')
 
 		const beerOptions = beerData?.map((beer) => {
 			return `
