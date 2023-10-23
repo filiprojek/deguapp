@@ -11,7 +11,9 @@
 	
 	// Date Time Zone
 	date_default_timezone_set('Europe/Prague');
-	$API_URL = "http://localhost:6060"
+	$API_URL = "http://localhost:6060";
+
+	$LOGGEDIN = !false;
 ?>
 
 <!DOCTYPE html>
@@ -20,22 +22,34 @@
 		<title>DeguApp</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link href="home.css" rel="stylesheet">
+		<link href="/css/_general.css" rel="stylesheet">
+		<link href="/css/_variables.css" rel="stylesheet">
+		<link href="/css/nav.css" rel="stylesheet">
+		<link href="/css/home.css" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
 	</head>
 	<body>
-		<header>
-			<div class="flex-left">
+		<header class="f-row nav-wrapper">
+			<div class="">
 				<a href="/">DeguApp</a>
 			</div>
-			<div class="flex-left">
+			<div class="">
+			<?php
+			if(!$LOGGEDIN) {
+			?>
 				<a href="/login">Přihlásit se</a>
 				<a href="/signup">Registrace</a>
+			<?php
+			} else{
+			?>
 				<a href="/add_beer">Přidat pivo</a>
 				<a href="/add_review">Přidat recenzi</a>
+			<?php } ?>
 			</div>
 		</header>
 		<section class="main-wrapper">
-			<h1>DeguApp</h1>
+			<!-- routing shits -->
 			<?php
 				$R = new Router();
 				$R->route('GET', '/', 'home');

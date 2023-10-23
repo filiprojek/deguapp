@@ -1,0 +1,8 @@
+.nav-wrapper {
+	justify-content: space-between;
+	padding: 1rem 0.5rem;
+}
+
+a {
+	color: black;
+}
