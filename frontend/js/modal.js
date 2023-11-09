@@ -2,8 +2,7 @@
 const close = qSA(".md-close")
 close.forEach(one => {
     one.addEventListener("click", (el) => {
-        const active = qS(".md-active")
-        active.classList.remove("md-active")
+        qS(".md-active").classList.remove("md-active")
     })
 })
 

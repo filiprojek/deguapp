@@ -9,6 +9,9 @@
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+    animation-name: fadein;
+    animation-duration: 0.4s;
 }
 
 /* Modal Content/Box */
@@ -17,21 +20,58 @@
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
+    border-radius: 15px;
     width: 80%; /* Could be more or less, depending on screen size */
 
 
     position: relative;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    animation-name: animatetop;
-    animation-duration: 0.4s
+    animation-name: fadein;
+    animation-duration: 0.4s;
+}
+
+.md-close {
+    position: relative;
+    left: 95%;
+    cursor: pointer;
 }
 
 .md-active {
     display: block;
 }
 
+
+.md-active-mobile {
+    display: block;
+}
+
+@media only screen and (min-width: 600px) {
+    .md-active {
+        display: none;
+    }
+}
+
+.modal-content h2 {
+    margin-bottom: 2rem;
+}
+.modal-content a {
+    text-decoration: none;
+    padding: 1rem 0rem;
+    width: 100%;
+    text-align: center;
+}
+
+.modal-content a:hover {
+    background-color: #888;
+}
+
 /* Add Animation */
-@keyframes animatetop {
-    from {top: -300px; opacity: 0}
-    to {top: 0; opacity: 1}
+@keyframes fadein {
+    from { opacity: 0}
+    to {opacity: 1}
+}
+
+@keyframes fadeout {
+    from { opacity: 1}
+    to {opacity: 0}
 }

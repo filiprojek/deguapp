@@ -15,7 +15,10 @@ function show_modal(selector, modal_selector = null) {
 }
 
 show_modal(".nav-add", "#md-add-tree")
-show_modal(".nav-user", "#md-user-tree")
 show_modal("#nav-login", "#md-login")
 show_modal("#nav-signup", "#md-signup")
+show_modal(".nav-user", "#md-user-tree")
 
+qS(".nav-user").addEventListener("click", () => {
+	qS(".nav-user-dropdown").classList.toggle("visible")
+})

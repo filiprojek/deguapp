@@ -23,3 +23,25 @@ a {
 	width: 3rem;
 }
 
+@media only screen and (min-width: 600px) {
+	.nav-user-dropdown {
+		position: absolute;
+		right: .5rem;
+		top: 4rem;
+		background: white;
+		box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+		height: 5rem;
+		width: 8rem;
+		display: flex !important;
+		flex-direction: column;
+		gap: .5rem;
+		visibility: hidden;
+	}
+}
+.nav-user-dropdown {
+	display: none;
+}
+
+.visible {
+	visibility: visible;
+}

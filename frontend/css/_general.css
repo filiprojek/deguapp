@@ -5,7 +5,11 @@
 }
 
 body {
-	font-family: OpenSans;
+	font-family: OpenSans Roboto sans-serif;
+}
+
+a {
+	text-decoration: none;
 }
 
 .flex {

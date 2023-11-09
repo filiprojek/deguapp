@@ -31,9 +31,9 @@
 		<link rel="stylesheet" href="/css/home.css">
 		<link rel="stylesheet" href="/css/md-add.css">
 		<link rel="stylesheet" href="/css/modal.css">
-		<script defer src="/js/general.js"></script>
-		<script defer src="/js/modal.js"></script>
-		<script defer src="/js/nav.js"></script>
+		<script src="/js/general.js"></script>
+		<script src="/js/modal.js"></script>
+		<script src="/js/nav.js"></script>
 	</head>
 	<body>
 		<header class="f-row nav-wrapper">
@@ -65,6 +65,11 @@
 				<div class="nav-item nav-user">
 					<img src="/img/icons/user.svg" alt="user icon">
 					<a href="#">Test Testovic</a>
+				</div>
+				<div class="nav-user-dropdown">
+					<a href="#">Můj účet</a>
+					<a href="#">Nastavení</a>
+					<a href="#">Odhlásit se</a>
 				</div>
 			<?php } ?>
 			</div>
@@ -109,8 +114,10 @@
 				<div class="modal-content">
 					<span class="md-close">&times;</span>
 					<div class="f-col f-center">
-						<h2>Hello User!<h2>
-						<a href="/logout">Logout</a>
+						<h2>Ahoj Pepo!</h2>
+						<a href="/my-account">Můj účet</a>
+						<a href="/settings">Nastavení</a>
+						<a href="/logout">Odhlásit se</a>
 					</div>
 				</div>
 			</section>
