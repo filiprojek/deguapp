@@ -1,8 +1,25 @@
 .nav-wrapper {
 	justify-content: space-between;
-	padding: 1rem 0.5rem;
+	padding: 0.5rem;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	margin-bottom: 1rem;
 }
 
 a {
 	color: black;
 }
+
+.nav-2 {
+	gap: 1rem;
+}
+.nav-item {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+.nav-user img {
+	width: 3rem;
+}
+

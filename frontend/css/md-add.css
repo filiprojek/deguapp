@@ -1,0 +1,10 @@
+.select-box {
+	padding: 4rem;
+	/*border: 5px solid red;*/
+	cursor: pointer;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#md-add-tree .f-row.f-center{
+	gap: 2rem;
+}

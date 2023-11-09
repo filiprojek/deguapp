@@ -4,7 +4,8 @@
 <link href="/css/add.css" rel="stylesheet">
 <h1>Přidání piva</h1>
 
-<form class="form_add">
+<section class="flex f-center">
+<form class="form_add card">
 	<div class=form_group>
 		<div class=form_group_label>
 			<label for="name">Název, značka:</label>
@@ -41,6 +42,8 @@
 		<div class=form_group_label>
 			<label for="photo">Foto:</label>
 			<input type="file" name="photo" id="photo" enable>
+			<label for="upload">Upload File</label>
+n
 		</div>
 	</div>
 
@@ -83,4 +86,4 @@
 			})
 	}
 </script>
-
+</section>

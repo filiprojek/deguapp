@@ -9,3 +9,12 @@
 	flex-direction: column;
 }
 
+form {
+	padding: 1rem;
+}
+input {
+	margin: 0.3rem 0;
+}
+input[type="file"] {
+	font-size: 17px;
+}

@@ -1,8 +1,10 @@
 <?php
 class Router {
 	public $returned = false;
+	public $url = null;
 
 	function route($method, $url, $filename) {
+		$this->url = $url;
 		$methods = ['GET', 'POST'];
 		if(in_array($method, $methods)) {
 			if($_SERVER['REQUEST_METHOD'] == $method) {
@@ -13,6 +15,10 @@ class Router {
 				}
 			}
 		}
+	}
+
+	function getUrl() {
+		return $_SERVER['REQUEST_URI'];
 	}
 
 	function __destruct() {
