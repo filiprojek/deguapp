@@ -18,12 +18,13 @@
 </form>
 
 <script>
-	const btn = document.querySelector('.btn-send')
-	console.log(btn)
-	btn.addEventListener('click', (e) => {
-		e.preventDefault()
-		send()
-	})
+	(() => {
+		const btn = document.querySelector('.btn-send')
+		btn.addEventListener('click', (e) => {
+			e.preventDefault()
+			send()
+		})
+	})()
 
 	function send() {
 		let form = new FormData(document.querySelector("form"));

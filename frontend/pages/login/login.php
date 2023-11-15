@@ -16,7 +16,6 @@
 
 <script>
 	const btn = document.querySelector('.btn-send')
-	console.log(btn)
 	btn.addEventListener('click', (e) => {
 		e.preventDefault()
 		send()

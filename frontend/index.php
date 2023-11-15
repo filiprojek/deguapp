@@ -31,9 +31,6 @@
 		<link rel="stylesheet" href="/css/home.css">
 		<link rel="stylesheet" href="/css/md-add.css">
 		<link rel="stylesheet" href="/css/modal.css">
-		<script src="/js/general.js"></script>
-		<script src="/js/modal.js"></script>
-		<script src="/js/nav.js"></script>
 	</head>
 	<body>
 		<header class="f-row nav-wrapper">
@@ -78,23 +75,31 @@
 			<!-- routing shits -->
 			<?php
 				$R = new Router();
-				$R->route('GET', '/', 'home');
-				$R->route('GET', '/beer/add', 'beer_add');
-				$R->route('GET', '/review/add', 'review_add');
-				$R->route('GET', '/login', 'login');
-				$R->route('GET', '/signup', 'signup');
+				if(!$LOGGEDIN) {
+					$R->route('GET', '/', 'home');
+					$R->route('GET', '/login', 'login');
+					$R->route('GET', '/signup', 'signup');
+				}
 
-				$R->route('POST', '/contact/send', 'contact');
+				if($LOGGEDIN) {
+					$R->route('GET', '/', 'beer_get');
+					$R->route('GET', '/beer/add', 'beer_add');
+					$R->route('GET', '/beer/get/{id}', 'beer_get');
+					$R->route('GET', '/review/add', 'review_add');
+
+					$R->route('POST', '/contact/send', 'contact');
+				}
 
 				if(!$LOGGEDIN && $R->getUrl() == '/') {
 					// show login page
 				}
 
-				$R = null;
+				//$R = null;
 			?>
 
 			<!-- modals -->
 			<!-- add modal -->
+		<?php if($LOGGEDIN) {?>
 			<section class="modal" id="md-add-tree">
 				<div class="modal-content">
 					<span class="md-close">&times;</span>
@@ -121,7 +126,9 @@
 					</div>
 				</div>
 			</section>
+		<?php }?>
 
+		<?php if(!$LOGGEDIN) {?>
 			<!-- login modal -->
 			<section class="modal" id="md-login">
 				<div class="modal-content">
@@ -147,12 +154,18 @@
 					</div>
 				</div>
 			</section>
+		<?php }?>
 
 		</section>
 		<footer>
 			<a href="https://git.filiprojek.cz/fr/deguapp">Source</a>
 			<a href="http://filiprojek.cz/">(c) Filip Rojek, 2023</a>
 		</footer>
+
+		<script defer src="/js/general.js"></script>
+		<script defer src="/js/modal.js"></script>
+		<script defer src="/js/nav.js"></script>
+		<script defer src="/js/home.js"></script>
 	</body>
 </html>
 

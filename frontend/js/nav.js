@@ -3,14 +3,12 @@ function show_modal(selector, modal_selector = null) {
 		if(modal_selector === null) {
 			modal_selector = selector
 		}
-	
 		const btn = qS(selector)
 		const md = qS(modal_selector)
 		btn.addEventListener("click", (el) => {
 		    md.classList.add("md-active")
 		})
 	} catch (error) {
-		console.error(error)
 	}
 }
 
@@ -19,6 +17,9 @@ show_modal("#nav-login", "#md-login")
 show_modal("#nav-signup", "#md-signup")
 show_modal(".nav-user", "#md-user-tree")
 
-qS(".nav-user").addEventListener("click", () => {
-	qS(".nav-user-dropdown").classList.toggle("visible")
-})
+try {
+	qS(".nav-user").addEventListener("click", () => {
+		qS(".nav-user-dropdown").classList.toggle("visible")
+	})
+} catch (err) {
+}
