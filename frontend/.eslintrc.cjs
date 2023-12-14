@@ -1,15 +1,14 @@
-/** @type { import("eslint").Linter.FlatConfig } */
+/* eslint-env node */
+require('@rushstack/eslint-patch/modern-module-resolution')
+
 module.exports = {
-	root: true,
-	extends: ['eslint:recommended', 'plugin:svelte/recommended', 'prettier'],
-	parserOptions: {
-		sourceType: 'module',
-		ecmaVersion: 2020,
-		extraFileExtensions: ['.svelte']
-	},
-	env: {
-		browser: true,
-		es2017: true,
-		node: true
-	}
-};
+  root: true,
+  'extends': [
+    'plugin:vue/vue3-essential',
+    'eslint:recommended',
+    '@vue/eslint-config-prettier/skip-formatting'
+  ],
+  parserOptions: {
+    ecmaVersion: 'latest'
+  }
+}
