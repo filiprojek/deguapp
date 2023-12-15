@@ -1,0 +1,11 @@
+header {
+  width: 100vw;
+  padding: 2rem 1rem;
+  background-color: var(--blue-shadow);
+}
+
+header,
+header > * {
+  display: flex;
+  justify-content: space-between;
+}
