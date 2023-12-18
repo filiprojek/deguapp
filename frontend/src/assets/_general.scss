@@ -6,11 +6,13 @@
 
 body {
   font-family: OpenSans Roboto sans-serif;
-  background-color: var(--blue-space);
+  background-color: var(--clr1);
+  color: var(--clr6);
 }
 
 a {
   text-decoration: none;
+  color: var(--clr6);
 }
 
 .flex {
