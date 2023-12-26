@@ -1,6 +1,4 @@
-import './assets/_general.scss'
-import './assets/_vars.scss'
-import './assets/nav.scss'
+import './assets/main.scss'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
