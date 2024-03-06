@@ -72,3 +72,5 @@ Date: "2024-03-06 16:13:40" Type: "Err" Code: "500" Message: "unsupported databa
 Date: "2024-03-06 16:13:40" Type: "Err" Code: "500" Message: "Can't connect to db
 SequelizeConnectionError: (conn=3, no: 1049, SQLState: 42000) Unknown database 'deguapp'"
 Date: "2024-03-06 16:15:55" Type: "Err" Code: "500" Message: "unsupported database mysql"
+Date: "2024-03-06 16:27:07" Type: "Err" Code: "500" Message: ".env file for test environment does not exists"
+Date: "2024-03-06 16:28:38" Type: "Err" Code: "500" Message: ".env file for test environment does not exists"

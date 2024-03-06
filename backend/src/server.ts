@@ -15,4 +15,4 @@ export function runServer(): void {
 }
 
 runServer()
-const db_connection = database()
+database()
