@@ -14,18 +14,5 @@ export function runServer(): void {
 	})
 }
 
-// TODO: Fix this shit
-//(async () => {
-//	if (!env.NORK.database) {
-//		runServer()
-//	} else {
-//		const db_connection = await database()
-//		if (db_connection) {
-//			runServer()
-//		}
-//	}
-//
-//})()
-//
 runServer()
 const db_connection = database()

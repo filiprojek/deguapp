@@ -3,7 +3,7 @@ import env from './environment'
 
 const db = new Sequelize(env.DB_DATABASE, env.DB_USERNAME, env.DB_PASSWORD, {
 	host: env.DB_HOST,
-	dialect: 'postgres',
+	dialect: env.DB_DIALECT,
 	logging: false
 })
 

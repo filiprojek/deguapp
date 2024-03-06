@@ -47,3 +47,28 @@ Date: "2023-07-01 18:30:40" Type: "Err" Code: "500" Message: "unsupported databa
 Date: "2023-07-01 18:31:01" Type: "Err" Code: "500" Message: "unsupported database mongodb"
 Date: "2023-07-01 18:31:26" Type: "Err" Code: "500" Message: "unsupported database mongodb"
 Date: "2023-07-01 18:32:01" Type: "Err" Code: "500" Message: "unsupported database mongodb"
+Date: "2024-03-06 14:55:10" Type: "Err" Code: "500" Message: ".env file for  environment does not exists"
+Date: "2024-03-06 14:58:42" Type: "Err" Code: "500" Message: "JWT_SECRET is not set!"
+Date: "2024-03-06 14:59:11" Type: "Err" Code: "500" Message: "unsupported database mongodb"
+Date: "2024-03-06 14:59:41" Type: "Err" Code: "500" Message: "{"message":"connect ECONNREFUSED ::1:27017","reason":{"type":"Single","setName":null,"maxSetVersion":null,"maxElectionId":null,"servers":{},"stale":false,"compatible":true,"compatibilityError":null,"logicalSessionTimeoutMinutes":null,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"commonWireVersion":null}}"
+Date: "2024-03-06 15:12:22" Type: "Err" Code: "500" Message: "unsupported database mongodb"
+Date: "2024-03-06 15:12:52" Type: "Err" Code: "500" Message: "{"message":"connect ECONNREFUSED ::1:27017","reason":{"type":"Single","setName":null,"maxSetVersion":null,"maxElectionId":null,"servers":{},"stale":false,"compatible":true,"compatibilityError":null,"logicalSessionTimeoutMinutes":null,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"commonWireVersion":null}}"
+Date: "2024-03-06 15:17:17" Type: "Err" Code: "500" Message: "unsupported database mysql"
+Date: "2024-03-06 15:17:17" Type: "Err" Code: "500" Message: "Can't connect to db
+SequelizeConnectionRefusedError: connect ECONNREFUSED 127.0.0.1:5432"
+Date: "2024-03-06 15:45:46" Type: "Err" Code: "500" Message: "unsupported database mysql"
+Date: "2024-03-06 15:45:46" Type: "Err" Code: "500" Message: "Can't connect to db
+SequelizeConnectionRefusedError: connect ECONNREFUSED 127.0.0.1:5432"
+Date: "2024-03-06 15:46:51" Type: "Err" Code: "500" Message: "unsupported database mysql"
+Date: "2024-03-06 15:46:51" Type: "Err" Code: "500" Message: "Can't connect to db
+SequelizeConnectionRefusedError: connect ECONNREFUSED 127.0.0.1:5432"
+Date: "2024-03-06 16:08:39" Type: "Err" Code: "500" Message: "unsupported database mysql"
+Date: "2024-03-06 16:08:39" Type: "Err" Code: "500" Message: "Can't connect to db
+SequelizeConnectionRefusedError: connect ECONNREFUSED 127.0.0.1:3306"
+Date: "2024-03-06 16:12:55" Type: "Err" Code: "500" Message: "unsupported database mysql"
+Date: "2024-03-06 16:12:55" Type: "Err" Code: "500" Message: "Can't connect to db
+SequelizeConnectionRefusedError: connect ECONNREFUSED 127.0.0.1:3306"
+Date: "2024-03-06 16:13:40" Type: "Err" Code: "500" Message: "unsupported database mysql"
+Date: "2024-03-06 16:13:40" Type: "Err" Code: "500" Message: "Can't connect to db
+SequelizeConnectionError: (conn=3, no: 1049, SQLState: 42000) Unknown database 'deguapp'"
+Date: "2024-03-06 16:15:55" Type: "Err" Code: "500" Message: "unsupported database mysql"

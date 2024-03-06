@@ -3,8 +3,8 @@
   "lang": "ts",
   "author": "Filip Rojek",
   "database": {
-    "db": "mongodb",
-    "orm": "mongoose"
+    "db": "mysql",
+    "orm": "sequelize"
   },
   "website": "http://filiprojek.cz/",
   "email": "filip@filiprojek.cz",

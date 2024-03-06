@@ -5,7 +5,9 @@ services:
     image: mariadb
     restart: always
     environment:
-      MARIADB_ROOT_PASSWORD: 39In1bx7
+      MARIADB_ROOT_PASSWORD: '39In1bx7'
+    ports:
+      - 3306:3306
     volumes:
       - ./db_data:/var/lib/mysql
 

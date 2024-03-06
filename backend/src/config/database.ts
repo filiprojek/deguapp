@@ -39,11 +39,6 @@ async function connect() {
 				return false
 			})
 	}
-
-	if (env.NORK.database.db.length > 0) {
-		new Err(500, `unsupported database ${env.NORK.database.db}`)
-		return false
-	}
 }
 
 export default connect

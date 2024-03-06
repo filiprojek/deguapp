@@ -2,6 +2,7 @@ import path from 'path'
 import fs from 'fs-extra'
 import { Err } from '../services/globalService'
 import dotenv from 'dotenv'
+import { Dialect } from 'sequelize'
 const env_path = process.env.NODE_ENV ? `../.env.${process.env.NODE_ENV}` : '../.env'
 
 dotenv.config({ path: path.join(__dirname, env_path) })
@@ -43,9 +44,10 @@ export default {
 	JWT_SECRET: String(process.env.JWT_SECRET),
 	// MongoDB
 	DB_URI: String(process.env.DB_URI),
-	// PostgreSQL
+	// Sequelize
 	DB_PORT: Number(process.env.DB_PORT),
 	DB_HOST: String(process.env.DB_HOST),
+	DB_DIALECT: process.env.DB_DIALECT as Dialect,
 	DB_USERNAME: String(process.env.DB_USERNAME),
 	DB_PASSWORD: String(process.env.DB_PASSWORD),
 	DB_DATABASE: String(process.env.DB_DATABASE),
