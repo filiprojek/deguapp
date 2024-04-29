@@ -1,9 +1,9 @@
 import { Request, Response, Router } from "express";
 import path from "path";
-//import authRoutes from "./authRoutes";
+import authRoutes from "./authRoutes";
 export const router = Router();
 
-//router.use("/api/auth", authRoutes);
+router.use("/api/auth", authRoutes);
 
 //router.get("*", (req: Request, res: Response) => {
 //  res.sendFile(path.join(__dirname, "../views/index.html"));
