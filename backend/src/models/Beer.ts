@@ -1,37 +1,32 @@
-import { Schema, model } from 'mongoose'
-import path from 'path'
+import {DataTypes} from Sequelize;
+import sequelize from '../config/database'
 
-const schema = new Schema<any>(
-	{
-		name: {
-			type: String,
-			required: true
-		},
-		degree: {
-			type: Number,
-			required: true,
-		},
-		percentage: {
-			type: Number,
-			required: true
-		},
-		packaging: {
-			type: Number,
-			required: true
-		},
-		note: {
-			type: String,
-			required: false
-		},
-		photo: {
-			type: Array,
-			required: false,
-		}
-	},
-	{
-		timestamps: true,
-	},
-)
-
-export default model(path.basename(__filename).split('.')[0], schema)
-
+export default = sequelize.define(path.basename(__filename).split('.')[0], {
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    degree: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    percentage: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    packaging: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    note: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    photo: {
+        type: DataTypes.ARRAY(DataTypes.STRING), // Assuming photo is an array of strings
+        allowNull: true
+    }
+}, {
+    timestamps: true,
+    // Other model options here
+});
