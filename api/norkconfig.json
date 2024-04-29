@@ -1,0 +1,12 @@
+{
+  "project_name": "deguapp-api",
+  "lang": "ts",
+  "author": "Filip Rojek",
+  "database": {
+    "db": "mysql",
+    "orm": "sequelize"
+  },
+  "website": "http://filiprojek.cz",
+  "email": "filip@filiprojek.cz",
+  "version": "3.0.5"
+}

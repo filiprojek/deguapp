@@ -1,0 +1,31 @@
+/beer
+	/add
+	/del
+	/get
+	/edit?
+	/review
+		/add
+		/del
+		/get
+		/edit?
+
+/user
+	/add
+	/del
+	/get
+	/login
+	/signup
+	/edit?
+
+review kriteria:
+ - pena
+  - 3 stupne hodnoceni
+ - horkost-sladkost
+  - slider
+ - kyselost
+  - T/F
+ - packaging
+  - 5 stupnu hodnoceni
+ - dal bych si znovu
+  - T/F
+
