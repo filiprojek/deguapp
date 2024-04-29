@@ -8,7 +8,7 @@ const router = Router();
 
 //const mws = [requireAuth, handleValidation.handleValidationError];
 
-router.post("/login", authController.login_post);
+router.post("/signup", authController.signup_post);
 
 //router.post(
 //  "/login",

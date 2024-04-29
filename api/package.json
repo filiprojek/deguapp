@@ -13,7 +13,7 @@
 		"clean": "rimraf dist",
 		"copy-assets": "ts-node src/utils/copyAssets",
 		"build": "npm-run-all clean tsc copy-assets",
-		"test": "mocha --config .mocharc.json --watch src/**/*.test.ts",
+		"test": "npx jest . --runInBand",
 		"format": "npx prettier --write ."
 	},
 	"author": "Filip Rojek",
@@ -29,33 +29,38 @@
 		"path": "^0.12.7"
 	},
 	"devDependencies": {
+		"@biomejs/biome": "1.7.1",
 		"@types/chai": "^4.2.22",
 		"@types/express": "^4.17.21",
 		"@types/fs-extra": "^9.0.13",
 		"@types/inquirer": "^8.1.3",
+		"@types/jest": "^29.5.12",
 		"@types/mocha": "^9.0.0",
 		"@types/morgan": "^1.9.9",
 		"@types/shelljs": "^0.8.11",
+		"@types/supertest": "^6.0.2",
 		"@typescript-eslint/eslint-plugin": "^5.5.0",
 		"@typescript-eslint/parser": "^5.5.0",
 		"chai": "^4.3.4",
 		"eslint": "^8.3.0",
 		"http": "^0.0.1-security",
+		"jest": "^29.7.0",
 		"mocha": "^9.1.3",
 		"npm-run-all": "^4.1.5",
 		"prettier": "^2.7.1",
 		"rimraf": "^3.0.2",
 		"shelljs": "^0.8.5",
+		"supertest": "^7.0.0",
+		"ts-jest": "^29.1.2",
 		"ts-node": "^10.9.2",
 		"tsx": "^4.7.3",
 		"typescript": "^4.5.2"
 	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/filiprojek/nork.git"
-	},
-	"bugs": {
-		"url": "https://github.com/filiprojek/nork/issues"
-	},
-	"homepage": "https://github.com/filiprojek/nork/blob/master/README.md"
+	"jest": {
+		"preset": "ts-jest",
+		"testEnvironment": "node",
+		"setupFilesAfterEnv": [
+			"./tests/_setupFile.ts"
+		]
+	}
 }
