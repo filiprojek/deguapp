@@ -172,7 +172,10 @@ describe('POST /api/v1/auth/signin', () => {
 			email: 'thisistest@host.local',
 			password: 'Test12365465132'
 		});
+
 		expect(res.statusCode).toBe(401);
+		expect(res.header['set-cookie'][0]).toContain("jwt=; Max-Age=0")
+		expect(res.header['set-cookie'][1]).toContain("auth=false")
 	});
 
 	test('should login an user', async () => {
@@ -182,6 +185,8 @@ describe('POST /api/v1/auth/signin', () => {
 		});
 
 		expect(res.statusCode).toBe(200);
+		expect(res.header['set-cookie'][0]).toContain("jwt=")
+		expect(res.header['set-cookie'][1]).toContain("auth=true")
 	});
 });
 

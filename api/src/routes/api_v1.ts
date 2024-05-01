@@ -10,6 +10,7 @@ const router = Router();
 //const mws = [requireAuth, handleValidation.handleValidationError];
 
 router.post("/auth/signup",validate(AuthVal.signup) , authController.signup_post);
+router.post("/auth/signin",validate(AuthVal.signin) , authController.signin_post);
 
 //router.post(
 //  "/login",
