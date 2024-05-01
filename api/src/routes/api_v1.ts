@@ -1,6 +1,7 @@
 import { Router } from "express";
 import * as authController from "../controllers/authController";
-//import authValidator from "../validators/authValidator";
+import validate from '../middlewares/validateRequest'
+import * as AuthVal from '../validators/authValidator'
 //import handleValidation from "../middlewares/handleValidation";
 //import { requireAuth } from "../middlewares/authMiddleware";
 
@@ -8,7 +9,7 @@ const router = Router();
 
 //const mws = [requireAuth, handleValidation.handleValidationError];
 
-router.post("/signup", authController.signup_post);
+router.post("/auth/signup",validate(AuthVal.signup) , authController.signup_post);
 
 //router.post(
 //  "/login",
