@@ -190,9 +190,6 @@ describe('POST /api/v1/auth/signin', () => {
 	});
 });
 
-/**
- * Throws errors idk
-  
 describe('POST /api/v1/auth/logout', () => {
 	const url = '/api/v1/auth/logout';
 	test('should drop 401 error', async () => {
@@ -202,18 +199,13 @@ describe('POST /api/v1/auth/logout', () => {
 
 	test('should logout an user', async () => {
 		const jwt = await login();
-		const res = await request.post(url).set('Cookie', jwt).send({});
-
-		res.headers['set-cookie'].forEach((el: any) => {
-			if (el.split('=')[0] == 'jwt') {
-				expect(Number(el.split('=')[2][0])).toBe(0);
-			}
-		});
+		const res = await request.post(url).set('Cookie', jwt).send();
 
 		expect(res.statusCode).toBe(200);
+		expect(res.header['set-cookie'][0]).toContain("jwt=; Max-Age=0")
+		expect(res.header['set-cookie'][1]).toContain("auth=false")
 	});
 });
- */
 
 /*
 describe('GET /api/v1/auth/status', () => {

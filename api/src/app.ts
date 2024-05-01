@@ -1,8 +1,8 @@
 import express from "express";
 import morgan from "morgan";
-//import path from 'path'
+import path from 'path'
 //import cors from 'cors'
-//import cookieParser from 'cookie-parser'
+import cookieParser from 'cookie-parser'
 import { router as routes } from "./routes";
 //import { router as middlewares } from './middlewares'
 //import env from './config/environment'
@@ -35,8 +35,8 @@ export const app = express();
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-//app.use(express.static(path.join(__dirname, 'public')))
-//app.use(cookieParser())
+app.use(express.static(path.join(__dirname, 'public')))
+app.use(cookieParser())
 
 // Routes
 app.use(routes);
