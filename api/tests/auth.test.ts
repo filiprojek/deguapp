@@ -217,5 +217,8 @@ describe('GET /api/v1/auth/status', () => {
 		const jwt = await login();
 		const res = await request.get(url).set('Cookie', jwt).send();
 		expect(res.statusCode).toBe(200);
+		expect(res.body.data.username).toBe("Test Test")
+		expect(res.body.data.email).toBe("thisistest@host.local")
+		expect(res.body.data.password).toBeUndefined()
 	});
 });
