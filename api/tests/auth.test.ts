@@ -207,7 +207,6 @@ describe('POST /api/v1/auth/logout', () => {
 	});
 });
 
-/*
 describe('GET /api/v1/auth/status', () => {
 	const url = '/api/v1/auth/status';
 	test('should return login status 401', async () => {
@@ -220,4 +219,3 @@ describe('GET /api/v1/auth/status', () => {
 		expect(res.statusCode).toBe(200);
 	});
 });
-*/
