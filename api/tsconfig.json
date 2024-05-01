@@ -7,9 +7,12 @@
 		"strict": true /* Enable all strict type-checking options. */,
 		"baseUrl": "./" /* Base directory to resolve non-absolute module names. */,
 		"esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility. */,
+		"resolveJsonModule": true,
+		"experimentalDecorators": true, /* Enables experimental support for ES7 decorators. */ 
+		"emitDecoratorMetadata": true, /* Enables experimental support for emitting type metadata for decorators. */
 		"skipLibCheck": true /* Skip type checking all .d.ts files. */,
 		"forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
-		"declaration": true
+		//"declaration": true, /* Enables experimental support for emitting type metadata for decorators. */
 	},
-	"exclude": ["_old", "node_modules", "src/make-files", "src/skeletons", "src/tests", "src/interfaces", "src/utils"]
+	"exclude": ["src/tests", "./tests"]
 }

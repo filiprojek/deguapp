@@ -11,7 +11,7 @@
 		"start:prod": "node dist/server.js",
 		"tsc": "tsc -p .",
 		"clean": "rimraf dist",
-		"copy-assets": "ts-node src/utils/copyAssets",
+		"copy-assets": "ts-node src/utils/copy_assets",
 		"build": "npm-run-all clean tsc copy-assets",
 		"test": "npx jest . --runInBand",
 		"format": "npx prettier --write ."
