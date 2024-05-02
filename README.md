@@ -46,7 +46,7 @@ To get started with DeguApp, follow these steps:
 ## Contributing
 
 Contributions are welcome! If you'd like to contribute to DeguApp, please fork the repository and submit a pull request with your changes.
-Use the upstream of the project, which can be found at https:/git.filiprojek.cz/fr/deguapp. *GitHub repository is just a mirror!*
+Use the upstream of the project, which can be found at https:/git.filiprojek.cz/fr/deguapp. **GitHub repository is just a mirror!**
 
 ## License
 
