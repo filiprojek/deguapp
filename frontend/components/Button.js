@@ -5,7 +5,16 @@ export default function Button(props) {
   const { onPress, title = "Save", color = "black" } = props;
   return (
     <Pressable
-      style={[styles.button, { backgroundColor: color }]}
+      style={({ pressed }) => [
+        {
+          backgroundColor: pressed
+            ? "rgb(210, 230, 255 )"
+            : color
+            ? color
+            : "black",
+        },
+        styles.button,
+      ]}
       onPress={onPress}
     >
       <Text style={styles.text}>{title}</Text>
@@ -21,7 +30,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     borderRadius: 4,
     elevation: 3,
-    backgroundColor: "black",
   },
   text: {
     fontSize: 16,
