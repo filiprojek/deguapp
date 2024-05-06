@@ -1,15 +1,26 @@
-import {
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-  View,
-  Text,
-  Image,
-} from "react-native";
+import { StyleSheet, TextInput, View, Text, Image } from "react-native";
+import { useEffect, useState } from "react";
+import { router } from "expo-router";
 import Button from "../components/Button";
 import { colors } from "../components/style";
 
-export function LoginForm() {
+import { useAuth } from "./context/AuthContext";
+
+function LoginPage() {
+  const [pass, setPass] = useState("");
+  const [email, setEmail] = useState("");
+  const { onLogin, authState } = useAuth();
+
+  useEffect(() => {
+    if (authState.authenticated) {
+      router.replace("/");
+    }
+  }, [authState.authenticated]);
+
+  function login() {
+    onLogin(email, pass);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -19,7 +30,6 @@ export function LoginForm() {
         />
         <Text style={styles.h1}>Please Log In</Text>
       </View>
-
       <View style={styles.form}>
         <TextInput
           style={styles.input}
@@ -30,6 +40,8 @@ export function LoginForm() {
           keyboardType="email-address"
           placeholderTextColor={"#aaaaaa"}
           returnKeyType="next"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
         />
         <TextInput
           style={styles.input}
@@ -37,19 +49,21 @@ export function LoginForm() {
           placeholder="Enter your password"
           placeholderTextColor={"#aaaaaa"}
           returnKeyType="done"
+          value={pass}
+          onChangeText={(text) => setPass(text)}
         />
         <View style={styles.btnContainer}>
           <Button
             style={styles.button}
             title="Sign Up"
             color={colors.charcoal}
-            onPress={() => alert("Signed In")}
+            onPress={() => router.replace("/signup")}
           />
           <Button
             style={styles.button}
             title="Log In"
             color={colors.gold}
-            onPress={() => alert("Logged In")}
+            onPress={login}
           />
         </View>
       </View>
@@ -92,9 +106,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     padding: 10,
+    color: "#fff",
   },
   btnContainer: {
     flexDirection: "row",
     gap: 5,
   },
 });
+
+export default LoginPage;

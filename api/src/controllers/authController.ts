@@ -52,7 +52,7 @@ export async function signin_post(req: Request, res: Response) {
 			res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
 			res.cookie('auth', true, { httpOnly: false, maxAge: maxAge * 1000 });
 
-			res.json(Log.info(200, 'user is logged in'));
+			res.json(Log.info(200, 'user is logged in', {jwt: token}));
 			return;
 		}
 
