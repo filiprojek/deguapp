@@ -1,9 +1,12 @@
-import { StyleSheet, TextInput, View, Text, Image } from "react-native";
+import { StyleSheet, TextInput, View, Image } from "react-native";
+import Text from "@components/Text";
+import Link from "@components/Link";
+import { LinearGradient } from "expo-linear-gradient";
+import { Animated } from "react-native";
 import { useEffect, useState } from "react";
 import { router } from "expo-router";
 import Button from "../components/Button";
 import { colors } from "../components/style";
-
 import { useAuth } from "./context/AuthContext";
 
 function LoginPage() {
@@ -23,13 +26,18 @@ function LoginPage() {
 
 	return (
 		<View style={styles.container}>
+			<AnimatedLinearGradient
+				colors={[colors.dark, colors.darkSecondary]}
+				style={styles.gradient}
+			/>
+
 			<View style={styles.header}>
 				<Image
 					source={require("../assets/deguapp_logo.png")}
 					style={styles.logo}
 				/>
-				<Text style={styles.h1}>Please Log In</Text>
 			</View>
+			<Text style={styles.h1}>Please Log In</Text>
 			<View style={styles.form}>
 				<TextInput
 					style={styles.input}
@@ -55,32 +63,31 @@ function LoginPage() {
 				<View style={styles.btnContainer}>
 					<Button
 						style={styles.button}
-						title="Sign Up"
-						color={colors.charcoal}
-						onPress={() => router.replace("/signup")}
-					/>
-					<Button
-						style={styles.button}
 						title="Log In"
 						color={colors.gold}
 						onPress={login}
 					/>
 				</View>
+				<View>
+					<Link href="/signup">Don't have an account?</Link>
+				</View>
 			</View>
 		</View>
 	);
 }
+const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
 
 const styles = StyleSheet.create({
 	container: {
 		width: "100%",
 		height: "100%",
 		backgroundColor: colors.dark,
+		justifyContent: "center",
+		alignItems: "center",
 	},
 	form: {
 		flex: 1,
 		alignItems: "center",
-		paddingTop: "10%",
 		width: "100%",
 		gap: 15,
 	},
@@ -88,29 +95,41 @@ const styles = StyleSheet.create({
 		color: "#FFF",
 		fontSize: 30,
 		textAlign: "center",
-		paddingTop: "20%",
+		paddingTop: "3%",
+		paddingBottom: "3%",
 	},
 	logo: {
 		width: "80%",
 		resizeMode: "contain",
+		paddingBottom: "0%",
 	},
 	header: {
 		width: "100%",
 		alignItems: "center",
-		paddingTop: "20%",
+		paddingTop: "10%",
 	},
 	input: {
 		height: "auto",
 		width: "60%",
 		borderColor: "gray",
 		borderWidth: 1,
-		borderRadius: 5,
-		padding: 10,
+		borderRadius: 10,
+		padding: 13,
 		color: "#fff",
 	},
 	btnContainer: {
 		flexDirection: "row",
 		gap: 5,
+	},
+	button: {
+		width: "40%",
+	},
+	gradient: {
+		position: "absolute",
+		left: 0,
+		right: 0,
+		top: 0,
+		height: "100%",
 	},
 });
 
