@@ -2,7 +2,7 @@ import React from "react";
 import { Text, StyleSheet, Pressable } from "react-native";
 
 export default function Button(props) {
-	const { onPress, title = "Save", color = "black" } = props;
+	const { onPress, title = "Button", color = "black" } = props;
 	return (
 		<Pressable
 			style={({ pressed }) => [
