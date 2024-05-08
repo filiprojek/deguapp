@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import storageUtil from "./storage";
 
 const TOKEN_KEY = "my-jwt";
-export const API_URL = "http://10.69.1.137:6060/api/v1";
+export const API_URL = process.env.EXPO_PUBLIC_API_URL;
 const AuthContext = createContext(null);
 
 export function useAuth() {
