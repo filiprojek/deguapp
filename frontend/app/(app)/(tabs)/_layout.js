@@ -20,7 +20,7 @@ export default function TabLayout() {
 						backgroundColor: colors.darkSecondary,
 					},
 					tabBarActiveTintColor: colors.gold,
-					headerShown: false,
+					headerShown: true,
 				}}
 				sceneContainerStyle={{ backgroundColor: colors.dark }}
 			>
@@ -62,7 +62,10 @@ export default function TabLayout() {
 				/>
 
 				{/* Hide following routes from bottom bar */}
-				<Tabs.Screen name="beer/add" options={{ href: null }} />
+				<Tabs.Screen
+					name="beer/add"
+					options={{ href: null, title: "Add beer" }}
+				/>
 			</Tabs>
 		</View>
 	);
