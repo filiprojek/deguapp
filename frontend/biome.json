@@ -1,0 +1,15 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.7.3/schema.json",
+	"files": {
+		"ignore": [".expo/", ".vscode/", "node_modules/"]
+	},
+	"organizeImports": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": false,
+		"rules": {
+			"recommended": true
+		}
+	}
+}
