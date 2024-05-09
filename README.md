@@ -48,6 +48,38 @@ To get started with DeguApp, follow these steps:
 Contributions are welcome! If you'd like to contribute to DeguApp, please fork the repository and submit a pull request with your changes.
 Use the upstream of the project, which can be found at https:/git.filiprojek.cz/fr/deguapp. **GitHub repository is just a mirror!**
 
+## Local builds
+### Android
+
+```bash
+cd frontend/
+npm i
+
+export ANDROID_HOME=$HOME/.Android/Sdk/
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+echo "EXPO_PUBLIC_API_URL=https://degu.filiprojek.cz/api/v1" > .env
+
+npx expo prebuild
+
+# edit gradle.properties and add info about signing key
+# copy signing key to android/app/[keyname].keystore
+# edit android/app/build.gradle
+
+npx react-native build-android --mode=release
+
+bundletool build-apks --bundle=./frontend/android/app/build/outputs/bundle/release/app-release.aab --output ./deguapp.apks --ks <upload-key.keystore> --ks-key-alias <upload-key-alias>
+
+bundletool install-apks --apks=./deguapp.apks
+```
+
+
+### Resources:
+
+- https://github.com/expo/eas-cli/issues/1300
+- https://reactnative.dev/docs/signed-apk-android#generating-the-release-aab
+
 ## License
 
 This project is licensed under the GNU GPLv3 License - see the [LICENSE](LICENSE) file for details.
