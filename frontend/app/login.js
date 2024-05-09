@@ -69,7 +69,9 @@ function LoginPage() {
 					/>
 				</View>
 				<View>
-					<Link href="/signup">Don't have an account?</Link>
+					<Link href="/signup" style={styles.signup}>
+						Don't have an account?
+					</Link>
 				</View>
 			</View>
 		</View>
@@ -106,7 +108,7 @@ const styles = StyleSheet.create({
 	header: {
 		width: "100%",
 		alignItems: "center",
-		paddingTop: "10%",
+		paddingTop: "20%",
 	},
 	input: {
 		height: "auto",
@@ -130,6 +132,12 @@ const styles = StyleSheet.create({
 		right: 0,
 		top: 0,
 		height: "100%",
+	},
+	signup: {
+		textDecorationLine: "underline",
+		fontSize: 14,
+		marginTop: 10,
+		fontStyle: "italic",
 	},
 });
 

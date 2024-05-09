@@ -3,6 +3,8 @@ import { useState } from "react";
 import Button from "../components/Button";
 import { colors } from "../components/style";
 import { Link, router } from "expo-router";
+import { LinearGradient } from "expo-linear-gradient";
+import { Animated } from "react-native";
 
 import { useAuth } from "./context/AuthContext";
 
@@ -35,6 +37,10 @@ function SignupPage() {
 
 	return (
 		<View style={styles.container}>
+			<AnimatedLinearGradient
+				colors={[colors.dark, colors.darkSecondary]}
+				style={styles.gradient}
+			/>
 			<View style={styles.header}>
 				<Image
 					source={require("../assets/deguapp_logo.png")}
@@ -88,7 +94,7 @@ function SignupPage() {
 					color={colors.gold}
 					onPress={signin}
 				/>
-				<Link href="/login" style={styles.a}>
+				<Link href="/login" style={styles.login}>
 					Already have an account? Log In!
 				</Link>
 			</View>
@@ -96,16 +102,20 @@ function SignupPage() {
 	);
 }
 
+const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
+
 const styles = StyleSheet.create({
 	container: {
 		width: "100%",
 		height: "100%",
 		backgroundColor: colors.dark,
+		justifyContent: "center",
+		alignItems: "center",
+		maxHeight: "100%",
 	},
 	form: {
 		flex: 1,
 		alignItems: "center",
-		paddingTop: "10%",
 		width: "100%",
 		gap: 15,
 	},
@@ -113,35 +123,37 @@ const styles = StyleSheet.create({
 		color: "#FFF",
 		fontSize: 30,
 		textAlign: "center",
-		paddingTop: "20%",
-	},
-	a: {
-		color: "#FFF",
-		fontSize: 12,
-		fontStyle: "italic",
-		textDecorationLine: "underline",
+		paddingTop: "3%",
+		paddingBottom: "3%",
 	},
 	logo: {
 		width: "80%",
 		resizeMode: "contain",
+		marginTop: "15%",
 	},
 	header: {
 		width: "100%",
 		alignItems: "center",
-		paddingTop: "20%",
 	},
 	input: {
 		height: "auto",
 		width: "60%",
 		borderColor: "gray",
 		borderWidth: 1,
-		borderRadius: 5,
-		padding: 10,
+		borderRadius: 10,
+		padding: 13,
 		color: "#fff",
 	},
 	btnContainer: {
 		flexDirection: "row",
 		gap: 5,
+	},
+	login: {
+		color: "#FFF",
+		fontStyle: "italic",
+		textDecorationLine: "underline",
+		fontSize: 14,
+		marginTop: 10,
 	},
 });
 
