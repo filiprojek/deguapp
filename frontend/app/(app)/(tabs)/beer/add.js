@@ -157,9 +157,8 @@ export default function BeerAdd() {
 						buttonStyle={styles.imageButton}
 						textStyle={styles.imageTextButton}
 					/>
-
-					{image && <Image source={{ uri: image }} style={styles.image} />}
 				</View>
+				{image && <Image source={{ uri: image }} style={styles.image} />}
 				<Button title="Add beer" color={colors.gold} onPress={addBeer} />
 			</View>
 		</View>
