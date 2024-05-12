@@ -162,18 +162,12 @@ export default function BeerAdd() {
 						textStyle={styles.imageTextButton}
 					/>
 
-					{Platform.OS != "web" ? (
-						<Button
-							onPress={openCamera}
-							title={"Open camera"}
-							buttonStyle={styles.imageButton}
-							textStyle={styles.imageTextButton}
-						/>
-					) : (
-						false
-					)}
-
-					{image && <Image source={{ uri: image }} style={styles.image} />}
+					<Button
+						onPress={openCamera}
+						title="Open camera"
+						buttonStyle={styles.imageButton}
+						textStyle={styles.imageTextButton}
+					/>
 				</View>
 				{image && <Image source={{ uri: image }} style={styles.image} />}
 				<Button title="Add beer" color={colors.gold} onPress={addBeer} />
