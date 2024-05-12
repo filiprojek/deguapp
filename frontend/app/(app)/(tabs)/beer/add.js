@@ -3,7 +3,7 @@ import { useState } from "react";
 import Button from "@components/Button";
 import { colors } from "@components/style";
 import * as ImagePicker from "expo-image-picker";
-import { Picker } from "@react-native-picker/picker";
+import DropDownPicker from "react-native-dropdown-picker";
 
 export default function BeerAdd() {
 	const [b_name, setBName] = useState("");
@@ -12,6 +12,16 @@ export default function BeerAdd() {
 	const [b_brand, setBBrand] = useState("");
 	const [image, setImage] = useState(null);
 	const [selectPackaging, setSelectedPackaging] = useState();
+
+	const [open, setOpen] = useState(false);
+	const [value, setValue] = useState(null);
+	const [items, setItems] = useState([
+		{ label: "Can", value: "can" },
+		{ label: "Glass bottle", value: "glass" },
+		{ label: "Oddel barrel", value: "barrel" },
+		{ label: "Tank", value: "tank" },
+		{ label: "PET bottle", value: "PET" },
+	]);
 
 	ImagePicker.getCameraPermissionsAsync(); //check if the user has granted permission to access the camera
 	const pickImage = async () => {
@@ -114,19 +124,16 @@ export default function BeerAdd() {
 					onChangeText={(text) => setBPackaging(text)}
 					placeholderTextColor="#aaaaaa"
 				/>
-				<Picker
-					selectedValue={selectPackaging}
-					onValueChange={(itemValue, itemIndex) =>
-						setSelectedPackaging(itemValue)
-					}
-				>
-					<Picker.Item label="Can" value="can" />
-					<Picker.Item label="Glass" value="glass" />
-					<Picker.Item label="Pint" value="pint" />
-					<Picker.Item label="Oddel Barrel" value="oddelBarel" />
-					<Picker.Item label="Tank" value="tank" />
-					<Picker.Item label="PET bottle" value="petBottle" />
-				</Picker>
+				<DropDownPicker
+					open={open}
+					value={value}
+					items={items}
+					setOpen={setOpen}
+					setValue={setValue}
+					setItems={setItems}
+					placeholder={"What are you drinking from?"}
+					theme="DARK"
+				/>
 				<View style={styles.imageContainer}>
 					<Button
 						style={styles.imageButton}
