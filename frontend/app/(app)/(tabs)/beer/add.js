@@ -46,8 +46,8 @@ export default function BeerAdd() {
 		});
 		const res = await req.json();
 
-		if (res.success & res.new_beer_id) {
-			window.location.href = `/beer/${res.new_beer_id}`;
+		if (res.code == 201 && res.data._id) {
+			window.location.href = `/beer/${res.data._id}`;
 		} else {
 			alert(
 				"Beer was not added successfully. Please check your data and try again.",
