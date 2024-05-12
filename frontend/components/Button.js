@@ -7,6 +7,8 @@ export default function Button(props) {
 		title = "Button",
 		color = "black",
 		textColor = "white",
+		buttonStyle,
+		textStyle,
 	} = props;
 	return (
 		<Pressable
@@ -19,10 +21,13 @@ export default function Button(props) {
 							: "black",
 				},
 				styles.button,
+				buttonStyle,
 			]}
 			onPress={onPress}
 		>
-			<Text style={[styles.text, { color: textColor }]}>{title}</Text>
+			<Text style={[styles.text, { color: textColor }, textStyle]}>
+				{title}
+			</Text>
 		</Pressable>
 	);
 }
