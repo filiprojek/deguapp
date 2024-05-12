@@ -11,13 +11,11 @@ const DropdownTheme = require("@components/DropdownTheme");
 export default function BeerAdd() {
 	const [b_name, setBName] = useState("");
 	const [b_degree, setBDegree] = useState("");
-	const [b_packaging, setBPackaging] = useState("");
+	const [b_packaging, setBPackaging] = useState(null);
 	const [b_brand, setBBrand] = useState("");
 	const [image, setImage] = useState(null);
-	const [selectPackaging, setSelectedPackaging] = useState();
 
 	const [open, setOpen] = useState(false);
-	const [value, setValue] = useState(null);
 	const [items, setItems] = useState([
 		{ label: "Tank beer", value: "tank" },
 		{ label: "Cask beer", value: "cask" },
@@ -74,6 +72,22 @@ export default function BeerAdd() {
 		}
 	};
 
+	function validateDegreeInput(text) {
+		let newText = "";
+		let numbers = "0123456789.";
+
+		for (var i = 0; i < text.length; i++) {
+			if (numbers.indexOf(text[i]) > -1) {
+				newText = newText + text[i];
+				setBDegree(newText);
+			} else {
+				// your call back function
+				alert("Please enter numbers only.");
+				setBDegree("");
+			}
+		}
+	}
+
 	async function addBeer() {
 		// TODO: after the request - redirect to /beer/{new_beer_id}?; plus some modal about successful state
 		const req = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/beer/add`, {
@@ -123,25 +137,21 @@ export default function BeerAdd() {
 					style={styles.input}
 					placeholder="Degree"
 					value={b_degree}
-					onChangeText={(text) => setBDegree(text)}
+					onChangeText={(text) => validateDegreeInput(text)}
 					placeholderTextColor="#aaaaaa"
+					keyboardType="numeric"
 				/>
-				<TextInput
-					style={styles.input}
-					placeholder="Packaging"
-					value={b_packaging}
-					onChangeText={(text) => setBPackaging(text)}
-					placeholderTextColor="#aaaaaa"
-				/>
+
 				<DropDownPicker
 					open={open}
-					value={value}
+					value={b_packaging}
 					items={items}
 					setOpen={setOpen}
-					setValue={setValue}
+					setValue={setBPackaging}
 					setItems={setItems}
 					placeholder={"What are you drinking from?"}
 					theme="DropdownTheme"
+					//searchable={true} //maybe we can use it later...
 				/>
 				<View style={styles.imageContainer}>
 					<Button
