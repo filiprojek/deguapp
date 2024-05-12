@@ -1,9 +1,12 @@
 import { StyleSheet, TextInput, View, Image } from "react-native";
 import { useState } from "react";
 import Button from "@components/Button";
+import Text from "@components/Text";
 import { colors } from "@components/style";
 import * as ImagePicker from "expo-image-picker";
 import DropDownPicker from "react-native-dropdown-picker";
+/* import DropdownTheme from "@components/DropdownTheme"; */
+const DropdownTheme = require("@components/DropdownTheme");
 
 export default function BeerAdd() {
 	const [b_name, setBName] = useState("");
@@ -16,12 +19,15 @@ export default function BeerAdd() {
 	const [open, setOpen] = useState(false);
 	const [value, setValue] = useState(null);
 	const [items, setItems] = useState([
-		{ label: "Can", value: "can" },
+		{ label: "Tank beer", value: "tank" },
+		{ label: "Cask beer", value: "cask" },
 		{ label: "Glass bottle", value: "glass" },
-		{ label: "Oddel barrel", value: "barrel" },
-		{ label: "Tank", value: "tank" },
-		{ label: "PET bottle", value: "PET" },
+		{ label: "Can", value: "can" },
+		{ label: "PET bottle", value: "pet" },
 	]);
+
+	DropDownPicker.addTheme("DropdownTheme", DropdownTheme);
+	DropDownPicker.setTheme("DropdownTheme");
 
 	ImagePicker.getCameraPermissionsAsync(); //check if the user has granted permission to access the camera
 	const pickImage = async () => {
@@ -96,6 +102,9 @@ export default function BeerAdd() {
 	return (
 		<View style={styles.container}>
 			<View style={styles.form}>
+				<Text style={styles.text}>
+					Spill your thoughts about the beer you just sipped!
+				</Text>
 				<TextInput
 					style={styles.input}
 					placeholder="Name"
@@ -132,20 +141,26 @@ export default function BeerAdd() {
 					setValue={setValue}
 					setItems={setItems}
 					placeholder={"What are you drinking from?"}
-					theme="DARK"
+					theme="DropdownTheme"
 				/>
 				<View style={styles.imageContainer}>
 					<Button
-						style={styles.imageButton}
-						title="Pick an image from gallery"
+						title="Open gallery"
 						onPress={pickImage}
+						buttonStyle={styles.imageButton}
+						textStyle={styles.imageTextButton}
 					/>
 
-					<Button onPress={openCamera} title="Open camera" />
+					<Button
+						onPress={openCamera}
+						title="Open camera"
+						buttonStyle={styles.imageButton}
+						textStyle={styles.imageTextButton}
+					/>
 
 					{image && <Image source={{ uri: image }} style={styles.image} />}
 				</View>
-				<Button title="Add beer" color={colors.green} onPress={addBeer} />
+				<Button title="Add beer" color={colors.gold} onPress={addBeer} />
 			</View>
 		</View>
 	);
@@ -162,6 +177,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		paddingTop: "10%",
 		gap: 15,
+		width: "80%",
 	},
 	input: {
 		height: "auto",
@@ -172,16 +188,31 @@ const styles = StyleSheet.create({
 		padding: 13,
 		color: "#fff",
 	},
-	imageButton: {
-		width: "100%",
-		backgroundColor: "#FFD700",
-	},
 	imageContainer: {
 		alignItems: "center",
 		justifyContent: "center",
+		display: "flex",
+		flexDirection: "row",
+		gap: 10,
+	},
+	imageButton: {
+		backgroundColor: colors.dark,
+		borderColor: "gray",
+		borderWidth: 1,
+		borderRadius: 10,
+	},
+	imageTextButton: {
+		color: colors.white,
 	},
 	image: {
 		width: 150,
 		height: 150,
+	},
+	text: {
+		color: colors.white,
+		fontSize: 24,
+		textAlign: "center",
+		paddingTop: "3%",
+		paddingBottom: "3%",
 	},
 });

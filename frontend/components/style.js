@@ -8,4 +8,5 @@ export const colors = {
 	dark: "#010409",
 	darkSecondary: "#0D1117",
 	white: "#FFFFFF",
+	placeholder: "#aaaaaa",
 };
