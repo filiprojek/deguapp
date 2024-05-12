@@ -19,6 +19,33 @@ describe("POST /api/v1/beer/add", () => {
 		expect(res.statusCode).toBe(400);
 	});
 
+	test("should drop 400 (name)", async () => {
+		const jwt = await login();
+		const body: any = { ...addExam };
+		delete body.name;
+		const res = await request.post(url).set("Cookie", jwt).send(body);
+
+		expect(res.statusCode).toBe(400);
+	});
+
+	test("should drop 400 (degree)", async () => {
+		const jwt = await login();
+		const body: any = { ...addExam };
+		delete body.degree;
+		const res = await request.post(url).set("Cookie", jwt).send(body);
+
+		expect(res.statusCode).toBe(400);
+	});
+
+	test("should drop 400 (packaging)", async () => {
+		const jwt = await login();
+		const body: any = { ...addExam };
+		delete body.packaging;
+		const res = await request.post(url).set("Cookie", jwt).send(body);
+
+		expect(res.statusCode).toBe(400);
+	});
+
 	test("should drop 400 (brand)", async () => {
 		const jwt = await login();
 		const body: any = { ...addExam };

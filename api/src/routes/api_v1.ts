@@ -10,6 +10,7 @@ import validate from "../middlewares/validateRequest";
 import valMulter from "../middlewares/validateMulterRequest";
 import * as AuthVal from "../validators/authValidator";
 import * as BVal from "../validators/beerValidator";
+import * as RVal from "../validators/reviewValidator";
 
 const upload = multer({ dest: path.resolve(__dirname, "../../uploads") });
 
@@ -35,6 +36,7 @@ router.post(
 	beerController.edit_post,
 );
 
-router.post("/review/add", requireAuth, reviewController.add_post);
+router.post("/review/add", [requireAuth, validate(RVal.add)], reviewController.add_post);
+router.get("/review/get", requireAuth, reviewController.get_get);
 
 export default router;
