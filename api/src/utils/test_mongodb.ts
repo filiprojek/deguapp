@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
-const { MongoMemoryServer } = require('mongodb-memory-server');
+const mongoose = require("mongoose");
+const { MongoMemoryServer } = require("mongodb-memory-server");
 
 let mongo: any = null;
 
 const connectDB = async () => {
-	mongo = await MongoMemoryServer.create({ binary: { os: { os: 'linux', dist: 'ubuntu', release: '18.04' } } }); // TODO: check that host OS is Void Linux, else remove the argument 
+	mongo = await MongoMemoryServer.create({ binary: { os: { os: "linux", dist: "ubuntu", release: "18.04" } } }); // TODO: check that host OS is Void Linux, else remove the argument
 	const uri = mongo.getUri();
 
 	await mongoose.connect(uri);

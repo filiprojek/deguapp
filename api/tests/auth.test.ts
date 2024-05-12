@@ -1,22 +1,22 @@
-import supertest from 'supertest';
-import { app } from '../src/app';
-import { connectDB, dropDB, dropCollections } from '../src/utils/test_mongodb';
+import supertest from "supertest";
+import { app } from "../src/app";
+import { connectDB, dropDB, dropCollections } from "../src/utils/test_mongodb";
 
 const request = supertest(app);
 
 export const getJWT = async () => {
 	try {
-		const resReg: any = await request.post('/api/v1/auth/signup').send({
-			email: 'test@example.local',
-			password: 'admin1234',
-			username: 'Test Test'
+		const resReg: any = await request.post("/api/v1/auth/signup").send({
+			email: "test@example.local",
+			password: "admin1234",
+			username: "Test Test",
 		});
 
-		const resLog: any = await request.post('/api/auth/login').send({
-			email: 'test@example.local',
-			password: 'admin1234'
+		const resLog: any = await request.post("/api/auth/login").send({
+			email: "test@example.local",
+			password: "admin1234",
 		});
-		if (resLog.statusCode != 200) throw 'error while logging in';
+		if (resLog.statusCode != 200) throw "error while logging in";
 
 		const body = JSON.parse(resLog.text);
 		return Promise.resolve(body.data.jwt);
@@ -31,194 +31,194 @@ export const getJWT = async () => {
  * @returns JWT cookie
  */
 export async function login(): Promise<string> {
-	const res = await request.post('/api/v1/auth/signin').send({
-		email: 'thisistest@host.local',
-		password: 'Admin1234'
+	const res = await request.post("/api/v1/auth/signin").send({
+		email: "thisistest@host.local",
+		password: "Admin1234",
 	});
-	return res.headers['set-cookie'];
+	return res.headers["set-cookie"];
 }
 
 export async function signup(): Promise<boolean> {
-	const res = await request.post('/api/v1/auth/signup').send({
-		email: 'thisistest@host.local',
-		password: 'Admin1234',
-		username: 'Test Test'
+	const res = await request.post("/api/v1/auth/signup").send({
+		email: "thisistest@host.local",
+		password: "Admin1234",
+		username: "Test Test",
 	});
 
 	if (res.statusCode == 201) return true;
 	return false;
 }
 
-describe('POST /api/v1/auth/signup', () => {
-	describe('should drop validation error', () => {
-		it('should drop 400 (empty request))', async () => {
-			const res: any = await request.post('/api/v1/auth/signup').send({});
+describe("POST /api/v1/auth/signup", () => {
+	describe("should drop validation error", () => {
+		it("should drop 400 (empty request))", async () => {
+			const res: any = await request.post("/api/v1/auth/signup").send({});
 			expect(res.statusCode).toBe(400);
 		});
 
-		it('should drop 400 (email))', async () => {
-			const res: any = await request.post('/api/v1/auth/signup').send({
-				email: '',
-				username: 'User Admin',
-				password: 'Admin1234'
+		it("should drop 400 (email))", async () => {
+			const res: any = await request.post("/api/v1/auth/signup").send({
+				email: "",
+				username: "User Admin",
+				password: "Admin1234",
 			});
-            console.log(res)
+			console.log(res);
 			const body = JSON.parse(res.text);
 			expect(res.statusCode).toBe(400);
-			expect(body.data.path).toBe('email');
+			expect(body.data.path).toBe("email");
 		});
 
-		it('should drop 400 (username))', async () => {
-			const res: any = await request.post('/api/v1/auth/signup').send({
-				email: 'admin@localhost.local',
-				username: '',
-				password: 'Admin1234'
-			});
-			const body = JSON.parse(res.text);
-
-			expect(res.statusCode).toBe(400);
-			expect(body.data.path).toBe('username');
-		});
-		it('should drop 400 (password))', async () => {
-			const res: any = await request.post('/api/v1/auth/signup').send({
-				email: 'admin@localhost.local',
-				username: 'User Admin',
-				password: ''
+		it("should drop 400 (username))", async () => {
+			const res: any = await request.post("/api/v1/auth/signup").send({
+				email: "admin@localhost.local",
+				username: "",
+				password: "Admin1234",
 			});
 			const body = JSON.parse(res.text);
 
 			expect(res.statusCode).toBe(400);
-			expect(body.data.path).toBe('password');
+			expect(body.data.path).toBe("username");
 		});
-		it('should drop 400 (password - min 8 chars', async () => {
-			const res = await request.post('/api/v1/auth/signup').send({
-				email: 'admin@localhost.local',
-				username: 'User Admin',
-				password: 'Admin12'
+		it("should drop 400 (password))", async () => {
+			const res: any = await request.post("/api/v1/auth/signup").send({
+				email: "admin@localhost.local",
+				username: "User Admin",
+				password: "",
 			});
 			const body = JSON.parse(res.text);
 
 			expect(res.statusCode).toBe(400);
-			expect(body.data.path).toBe('password');
+			expect(body.data.path).toBe("password");
 		});
-		it('should drop 400 (password - min 1 number', async () => {
-			const res = await request.post('/api/v1/auth/signup').send({
-				email: 'admin@localhost.local',
-				username: 'User Admin',
-				password: 'Adminadmin'
+		it("should drop 400 (password - min 8 chars", async () => {
+			const res = await request.post("/api/v1/auth/signup").send({
+				email: "admin@localhost.local",
+				username: "User Admin",
+				password: "Admin12",
 			});
 			const body = JSON.parse(res.text);
 
 			expect(res.statusCode).toBe(400);
-			expect(body.data.path).toBe('password');
+			expect(body.data.path).toBe("password");
 		});
-		it('should drop 400 (password - min 1 uppercase', async () => {
-			const res = await request.post('/api/v1/auth/signup').send({
-				email: 'admin@localhost.local',
-				username: 'User Admin',
-				password: 'admin1234'
+		it("should drop 400 (password - min 1 number", async () => {
+			const res = await request.post("/api/v1/auth/signup").send({
+				email: "admin@localhost.local",
+				username: "User Admin",
+				password: "Adminadmin",
 			});
 			const body = JSON.parse(res.text);
 
 			expect(res.statusCode).toBe(400);
-			expect(body.data.path).toBe('password');
+			expect(body.data.path).toBe("password");
+		});
+		it("should drop 400 (password - min 1 uppercase", async () => {
+			const res = await request.post("/api/v1/auth/signup").send({
+				email: "admin@localhost.local",
+				username: "User Admin",
+				password: "admin1234",
+			});
+			const body = JSON.parse(res.text);
+
+			expect(res.statusCode).toBe(400);
+			expect(body.data.path).toBe("password");
 		});
 	});
 
-	test('should register an user', async () => {
-		const res: any = await request.post('/api/v1/auth/signup').send({
-			email: 'thisistest@host.local',
-			password: 'Admin1234',
-			username: 'Test Test'
+	test("should register an user", async () => {
+		const res: any = await request.post("/api/v1/auth/signup").send({
+			email: "thisistest@host.local",
+			password: "Admin1234",
+			username: "Test Test",
 		});
 
 		expect(res.statusCode).toBe(201);
 	});
 });
 
-describe('POST /api/v1/auth/signin', () => {
-	const url = '/api/v1/auth/signin';
+describe("POST /api/v1/auth/signin", () => {
+	const url = "/api/v1/auth/signin";
 
-	describe('should drop an validation error', () => {
-		it('should drop 400 (empty)', async () => {
+	describe("should drop an validation error", () => {
+		it("should drop 400 (empty)", async () => {
 			const res = await request.post(url).send();
 
 			expect(res.statusCode).toBe(400);
 		});
 
-		it('should drop 400 (email)', async () => {
+		it("should drop 400 (email)", async () => {
 			const res = await request.post(url).send({
-				password: 'Admin1234'
+				password: "Admin1234",
 			});
 			const body = JSON.parse(res.text);
 
 			expect(res.statusCode).toBe(400);
-			expect(body.data.path).toBe('email');
+			expect(body.data.path).toBe("email");
 		});
 
-		it('should drop 400 (password)', async () => {
+		it("should drop 400 (password)", async () => {
 			const res = await request.post(url).send({
-				email: 'thisistest@host.local'
+				email: "thisistest@host.local",
 			});
 			const body = JSON.parse(res.text);
 
 			expect(res.statusCode).toBe(400);
-			expect(body.data.path).toBe('password');
+			expect(body.data.path).toBe("password");
 		});
 	});
 
-	test('should drop 401', async () => {
+	test("should drop 401", async () => {
 		const res = await request.post(url).send({
-			email: 'thisistest@host.local',
-			password: 'Test12365465132'
+			email: "thisistest@host.local",
+			password: "Test12365465132",
 		});
 
 		expect(res.statusCode).toBe(401);
-		expect(res.header['set-cookie'][0]).toContain("jwt=; Max-Age=0")
-		expect(res.header['set-cookie'][1]).toContain("auth=false")
+		expect(res.header["set-cookie"][0]).toContain("jwt=; Max-Age=0");
+		expect(res.header["set-cookie"][1]).toContain("auth=false");
 	});
 
-	test('should login an user', async () => {
+	test("should login an user", async () => {
 		const res: any = await request.post(url).send({
-			email: 'thisistest@host.local',
-			password: 'Admin1234'
+			email: "thisistest@host.local",
+			password: "Admin1234",
 		});
 
 		expect(res.statusCode).toBe(200);
-		expect(res.header['set-cookie'][0]).toContain("jwt=")
-		expect(res.header['set-cookie'][1]).toContain("auth=true")
+		expect(res.header["set-cookie"][0]).toContain("jwt=");
+		expect(res.header["set-cookie"][1]).toContain("auth=true");
 	});
 });
 
-describe('POST /api/v1/auth/logout', () => {
-	const url = '/api/v1/auth/logout';
-	test('should drop 401 error', async () => {
+describe("POST /api/v1/auth/logout", () => {
+	const url = "/api/v1/auth/logout";
+	test("should drop 401 error", async () => {
 		const res = await request.post(url).send({});
 		expect(res.statusCode).toBe(401);
 	});
 
-	test('should logout an user', async () => {
+	test("should logout an user", async () => {
 		const jwt = await login();
-		const res = await request.post(url).set('Cookie', jwt).send();
+		const res = await request.post(url).set("Cookie", jwt).send();
 
 		expect(res.statusCode).toBe(200);
-		expect(res.header['set-cookie'][0]).toContain("jwt=; Max-Age=0")
-		expect(res.header['set-cookie'][1]).toContain("auth=false")
+		expect(res.header["set-cookie"][0]).toContain("jwt=; Max-Age=0");
+		expect(res.header["set-cookie"][1]).toContain("auth=false");
 	});
 });
 
-describe('GET /api/v1/auth/status', () => {
-	const url = '/api/v1/auth/status';
-	test('should return login status 401', async () => {
+describe("GET /api/v1/auth/status", () => {
+	const url = "/api/v1/auth/status";
+	test("should return login status 401", async () => {
 		const res = await request.get(url).send();
 		expect(res.statusCode).toBe(401);
 	});
-	test('should return login status 200', async () => {
+	test("should return login status 200", async () => {
 		const jwt = await login();
-		const res = await request.get(url).set('Cookie', jwt).send();
+		const res = await request.get(url).set("Cookie", jwt).send();
 		expect(res.statusCode).toBe(200);
-		expect(res.body.data.username).toBe("Test Test")
-		expect(res.body.data.email).toBe("thisistest@host.local")
-		expect(res.body.data.password).toBeUndefined()
+		expect(res.body.data.username).toBe("Test Test");
+		expect(res.body.data.email).toBe("thisistest@host.local");
+		expect(res.body.data.password).toBeUndefined();
 	});
 });

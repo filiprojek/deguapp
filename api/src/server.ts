@@ -1,7 +1,7 @@
 import http from "http";
 import { app } from "./app";
 import env from "./config/environment";
-import mongoose from 'mongoose' // TODO: dopsat nork module pro db
+import mongoose from "mongoose"; // TODO: dopsat nork module pro db
 import { Log } from "nork";
 
 const port: number = env.APP_PORT || 8080;
@@ -23,13 +23,11 @@ export const server = http.createServer(app);
 //	runServer()
 //}
 
-
-
 (async () => {
 	if (!process.env.DOCS_GEN) {
 		try {
 			await mongoose.connect(env.DB_URI);
-			Log.info(200, 'connected to db');
+			Log.info(200, "connected to db");
 			server.listen(port, () => {
 				Log.info(200, `Server is listening on http://localhost:${port}`);
 			});

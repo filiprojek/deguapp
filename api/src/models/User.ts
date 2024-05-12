@@ -1,26 +1,26 @@
-import path from 'path';
-import { Schema, model } from 'mongoose';
-import { IUser } from '../validators/authValidator';
+import path from "path";
+import { Schema, model } from "mongoose";
+import { IUser } from "../validators/authValidator";
 
 const schema = new Schema<IUser>(
 	{
 		username: {
 			type: String,
-			required: true
+			required: true,
 		},
 		email: {
 			type: String,
 			required: true,
-			unique: true
+			unique: true,
 		},
 		password: {
 			type: String,
-			required: true
-		}
+			required: true,
+		},
 	},
 	{
-		timestamps: true
-	}
+		timestamps: true,
+	},
 );
 
-export default model(path.basename(__filename).split('.')[0], schema);
+export default model(path.basename(__filename).split(".")[0], schema);

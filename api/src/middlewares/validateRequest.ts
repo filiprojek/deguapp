@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from 'express';
-import { object, AnySchema } from 'yup';
-import { Log } from 'nork';
+import { Request, Response, NextFunction } from "express";
+import { object, AnySchema } from "yup";
+import { Log } from "nork";
 
 const validate = (schema: AnySchema) => async (req: Request, res: Response, next: NextFunction) => {
 	try {
@@ -8,7 +8,7 @@ const validate = (schema: AnySchema) => async (req: Request, res: Response, next
 
 		next();
 	} catch (err: any) {
-		return res.status(400).json(Log.error(400, 'validation error', err));
+		return res.status(400).json(Log.error(400, "validation error", err));
 	}
 };
 

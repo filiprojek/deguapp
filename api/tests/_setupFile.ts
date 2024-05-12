@@ -1,4 +1,4 @@
-import { connectDB, dropDB, dropCollections } from '../src/utils/test_mongodb';
+import { connectDB, dropDB, dropCollections } from "../src/utils/test_mongodb";
 
 beforeAll(async () => {
 	await connectDB();

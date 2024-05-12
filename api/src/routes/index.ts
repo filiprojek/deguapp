@@ -11,5 +11,5 @@ router.use("/api/v1", api_v1);
 
 // 404
 router.use((req: Request, res: Response) => {
-  res.status(404).send("Error 404\n");
+	res.status(404).send("Error 404\n");
 });

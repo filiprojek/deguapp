@@ -1,8 +1,8 @@
-import fs from 'fs';
-import path from 'path';
+import fs from "fs";
+import path from "path";
 
-export type HttpMethods = 'POST' | 'GET' | 'PUT' | 'DELETE';
-export type ApiResponse = 'status object' | Object | string;
+export type HttpMethods = "POST" | "GET" | "PUT" | "DELETE";
+export type ApiResponse = "status object" | Object | string;
 
 export class Docs {
 	private name: string;
@@ -14,7 +14,16 @@ export class Docs {
 	private body?: Object;
 	private response?: ApiResponse;
 
-	public constructor(name: string, operation: string, route: string, method: HttpMethods, description?: string, parameters?: Object[], body?: Object, response?: ApiResponse) {
+	public constructor(
+		name: string,
+		operation: string,
+		route: string,
+		method: HttpMethods,
+		description?: string,
+		parameters?: Object[],
+		body?: Object,
+		response?: ApiResponse,
+	) {
 		this.name = name;
 		this.operation = operation;
 		this.route = route;
@@ -32,14 +41,14 @@ export class Docs {
 			return false;
 		}
 
-		const jsonPath = path.join(__dirname, '../public/api.json');
-		const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../../package.json')).toString());
+		const jsonPath = path.join(__dirname, "../public/api.json");
+		const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, "../../package.json")).toString());
 
 		const jsonAPI = () => JSON.parse(fs.readFileSync(jsonPath).toString());
 		const genJsonAPI = () => fs.writeFileSync(jsonPath, JSON.stringify({ version: pkg.version, endpoints: {} }));
 
-		if (!fs.existsSync(path.join(__dirname, '../public'))) {
-			fs.mkdirSync(path.join(__dirname, '../public'));
+		if (!fs.existsSync(path.join(__dirname, "../public"))) {
+			fs.mkdirSync(path.join(__dirname, "../public"));
 		}
 
 		if (!fs.existsSync(jsonPath)) {
