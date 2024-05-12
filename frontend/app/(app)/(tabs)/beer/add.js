@@ -1,13 +1,34 @@
-import { StyleSheet, TextInput, View } from "react-native";
+import { StyleSheet, TextInput, View, Image } from "react-native";
 import { useState } from "react";
 import Button from "@components/Button";
 import { colors } from "@components/style";
+import * as ImagePicker from "expo-image-picker";
+import { Picker } from "@react-native-picker/picker";
 
 export default function BeerAdd() {
 	const [b_name, setBName] = useState("");
 	const [b_degree, setBDegree] = useState("");
 	const [b_packaging, setBPackaging] = useState("");
 	const [b_brand, setBBrand] = useState("");
+	const [image, setImage] = useState(null);
+	const [selectPackaging, setSelectedPackaging] = useState();
+
+	ImagePicker.getCameraPermissionsAsync(); //check if the user has granted permission to access the camera
+	const pickImage = async () => {
+		// No permissions request is necessary for launching the image library
+		let result = await ImagePicker.launchImageLibraryAsync({
+			mediaTypes: ImagePicker.MediaTypeOptions.All,
+			allowsEditing: true,
+			aspect: [4, 3],
+			quality: 1,
+		});
+
+		console.log(result);
+
+		if (!result.canceled) {
+			setImage(result.assets[0].uri);
+		}
+	};
 
 	async function addBeer() {
 		// TODO: after the request - redirect to /beer/{new_beer_id}?; plus some modal about successful state
@@ -24,6 +45,14 @@ export default function BeerAdd() {
 			}),
 		});
 		const res = await req.json();
+
+		if (res.success & res.new_beer_id) {
+			window.location.href = `/beer/${res.new_beer_id}`;
+		} else {
+			alert(
+				"Beer was not added successfully. Please check your data and try again.",
+			);
+		}
 	}
 
 	return (
@@ -57,6 +86,27 @@ export default function BeerAdd() {
 					onChangeText={(text) => setBPackaging(text)}
 					placeholderTextColor="#aaaaaa"
 				/>
+				<Picker
+					selectedValue={selectPackaging}
+					onValueChange={(itemValue, itemIndex) =>
+						setSelectedPackaging(itemValue)
+					}
+				>
+					<Picker.Item label="Can" value="can" />
+					<Picker.Item label="Glass" value="glass" />
+					<Picker.Item label="Pint" value="pint" />
+					<Picker.Item label="Oddel Barrel" value="oddelBarel" />
+					<Picker.Item label="Tank" value="tank" />
+					<Picker.Item label="PET bottle" value="petBottle" />
+				</Picker>
+				<View style={styles.imageContainer}>
+					<Button
+						style={styles.imageButton}
+						title="Pick an image from gallery"
+						onPress={pickImage}
+					/>
+					{image && <Image source={{ uri: image }} style={styles.image} />}
+				</View>
 				<Button title="Add beer" color={colors.green} onPress={addBeer} />
 			</View>
 		</View>
@@ -65,22 +115,35 @@ export default function BeerAdd() {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
+		width: "100%",
+		height: "100%",
+		justifyContent: "center",
+		alignItems: "center",
 	},
 	form: {
-		flex: 1,
 		alignItems: "center",
 		paddingTop: "10%",
 		gap: 15,
 	},
-	input: {},
 	input: {
 		height: "auto",
-		width: "60%",
+		width: "100%",
 		borderColor: "gray",
 		borderWidth: 1,
-		borderRadius: 5,
-		padding: 10,
+		borderRadius: 10,
+		padding: 13,
 		color: "#fff",
+	},
+	imageButton: {
+		width: "100%",
+		backgroundColor: "#FFD700",
+	},
+	imageContainer: {
+		alignItems: "center",
+		justifyContent: "center",
+	},
+	image: {
+		width: 150,
+		height: 150,
 	},
 });
