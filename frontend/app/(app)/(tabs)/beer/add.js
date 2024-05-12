@@ -170,12 +170,11 @@ const styles = StyleSheet.create({
 	container: {
 		width: "100%",
 		height: "100%",
-		justifyContent: "center",
 		alignItems: "center",
+		display: "flex",
 	},
 	form: {
 		alignItems: "center",
-		paddingTop: "10%",
 		gap: 15,
 		width: "80%",
 	},
@@ -212,7 +211,7 @@ const styles = StyleSheet.create({
 		color: colors.white,
 		fontSize: 24,
 		textAlign: "center",
-		paddingTop: "3%",
 		paddingBottom: "3%",
+		paddingTop: "10%",
 	},
 });
