@@ -4,6 +4,7 @@ import path from 'path'
 import * as authController from "../controllers/authController";
 import * as beerController from "../controllers/beerController"
 import * as docsController from "../controllers/docsController"
+import * as reviewController from "../controllers/reviewController"
 import { requireAuth } from "../middlewares/authMiddleware";
 import validate from '../middlewares/validateRequest'
 import valMulter from '../middlewares/validateMulterRequest';
@@ -25,5 +26,7 @@ router.post('/beer/add', [requireAuth, upload.array('photos', 4), valMulter, val
 router.get('/beer/get', [requireAuth], beerController.get_get);
 router.post('/beer/del', [requireAuth, validate(BVal.del)], beerController.del_post);
 router.post('/beer/edit', [requireAuth, upload.array('photos', 4), valMulter, validate(BVal.edit)], beerController.edit_post);
+
+router.post('/review/add', requireAuth, reviewController.add_post)
 
 export default router;
