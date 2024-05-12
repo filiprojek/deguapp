@@ -15,14 +15,42 @@ export default function BeerAdd() {
 
 	ImagePicker.getCameraPermissionsAsync(); //check if the user has granted permission to access the camera
 	const pickImage = async () => {
+		const permissionResult =
+			await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+		if (permissionResult.granted === false) {
+			alert("You've refused to allow this appp to access your photos!");
+			return;
+		}
+
 		// No permissions request is necessary for launching the image library
-		let result = await ImagePicker.launchImageLibraryAsync({
-			mediaTypes: ImagePicker.MediaTypeOptions.All,
+		const result = await ImagePicker.launchImageLibraryAsync({
+			mediaTypes: ImagePicker.MediaTypeOptions.Images,
 			allowsEditing: true,
-			aspect: [4, 3],
-			quality: 1,
+			aspect: [3, 4],
+			// quality: 1,
 		});
 
+		// Explore the result
+		console.log(result);
+
+		if (!result.canceled) {
+			setImage(result.assets[0].uri);
+		}
+	};
+
+	const openCamera = async () => {
+		// Ask the user for the permission to access the camera
+		const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+
+		if (permissionResult.granted === false) {
+			alert("You've refused to allow this app to access your camera!");
+			return;
+		}
+
+		const result = await ImagePicker.launchCameraAsync();
+
+		// Explore the result
 		console.log(result);
 
 		if (!result.canceled) {
@@ -105,6 +133,9 @@ export default function BeerAdd() {
 						title="Pick an image from gallery"
 						onPress={pickImage}
 					/>
+
+					<Button onPress={openCamera} title="Open camera" />
+
 					{image && <Image source={{ uri: image }} style={styles.image} />}
 				</View>
 				<Button title="Add beer" color={colors.green} onPress={addBeer} />
