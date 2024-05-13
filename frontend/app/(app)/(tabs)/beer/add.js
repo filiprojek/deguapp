@@ -5,8 +5,8 @@ import Text from "@components/Text";
 import { colors } from "@components/style";
 import * as ImagePicker from "expo-image-picker";
 import DropDownPicker from "react-native-dropdown-picker";
-/* import DropdownTheme from "@components/DropdownTheme"; */
 const DropdownTheme = require("@components/DropdownTheme");
+import { Platform } from "react-native";
 
 export default function BeerAdd() {
 	const [b_name, setBName] = useState("");
@@ -140,6 +140,7 @@ export default function BeerAdd() {
 					onChangeText={(text) => validateDegreeInput(text)}
 					placeholderTextColor="#aaaaaa"
 					keyboardType="numeric"
+					maxLength={3}
 				/>
 
 				<DropDownPicker
@@ -161,12 +162,18 @@ export default function BeerAdd() {
 						textStyle={styles.imageTextButton}
 					/>
 
-					<Button
-						onPress={openCamera}
-						title="Open camera"
-						buttonStyle={styles.imageButton}
-						textStyle={styles.imageTextButton}
-					/>
+					{Platform.OS != "web" ? (
+						<Button
+							onPress={openCamera}
+							title={"Open camera"}
+							buttonStyle={styles.imageButton}
+							textStyle={styles.imageTextButton}
+						/>
+					) : (
+						false
+					)}
+
+					{image && <Image source={{ uri: image }} style={styles.image} />}
 				</View>
 				{image && <Image source={{ uri: image }} style={styles.image} />}
 				<Button title="Add beer" color={colors.gold} onPress={addBeer} />
