@@ -18,6 +18,7 @@ new Docs(
 export async function add_post(req: Request, res: Response) {
 	try {
 		const data: IReview = req.body;
+		data.user_id = res.locals.user._id
 		const review = new Review(data);
 		await review.save();
 		res.status(201).json(Log.info(201, "review was added", review));

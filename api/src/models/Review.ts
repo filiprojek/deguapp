@@ -28,6 +28,14 @@ const schema = new Schema<IReview | any>(
 			type: Boolean,
 			required: true,
 		},
+		beer_id: {
+			type: String,
+			required: true,
+		},
+		user_id: {
+			type: String,
+			required: true,
+		}
 	},
 	{
 		timestamps: true,

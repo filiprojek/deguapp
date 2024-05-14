@@ -87,7 +87,7 @@ export default function Tab() {
 								title="Add review"
 								color={colors.gold}
 								onPress={() => {
-									router.push(`/review/${item._id}`);
+									router.push(`/review/add/${item._id}`);
 								}}
 							/>
 						</View>

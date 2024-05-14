@@ -7,9 +7,11 @@ import * as ImagePicker from "expo-image-picker";
 import DropDownPicker from "react-native-dropdown-picker";
 const DropdownTheme = require("@components/DropdownTheme");
 import { Platform } from "react-native";
+import { useLocalSearchParams } from "expo-router";
 
 export default function reviewAdd() {
 	// States for each dropdown
+	const routeParams = useLocalSearchParams();
 	const [openFoam, setOpenFoam] = useState(false);
 	const [openBitterSweetness, setOpenBitterSweetness] = useState(false);
 	const [openTaste, setOpenTaste] = useState(false);
@@ -311,6 +313,7 @@ export default function reviewAdd() {
 			credentials: "include",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
+				beer_id: routeParams.beer_id,
 				foam: itemFoam,
 				bitter_sweetness: itemBitter_sweetness,
 				taste: itemTaste,
@@ -322,10 +325,12 @@ export default function reviewAdd() {
 		const res = await req.json();
 
 		if (res.code == 201 && res.data._id) {
-			window.location.href = `/review/${res.data._id}`;
+			// window.location.href = `/review/${res.data._id}`;
+			// TODO: use react router for redirect
+			alert("Review was added!");
 		} else {
 			alert(
-				"Beer was not added successfully. Please check your data and try again.",
+				"Review was not added successfully. Please check your data and try again.",
 			);
 		}
 	}

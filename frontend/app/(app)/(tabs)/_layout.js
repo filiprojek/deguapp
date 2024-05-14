@@ -67,7 +67,7 @@ export default function TabLayout() {
 					options={{ href: null, title: "Add beer" }}
 				/>
 				<Tabs.Screen
-					name="review/add"
+					name="review/add/[beer_id]"
 					options={{ href: null, title: "Add review" }}
 				/>
 			</Tabs>
