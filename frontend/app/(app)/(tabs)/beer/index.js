@@ -42,8 +42,7 @@ export default function Tab() {
 				}}
 			/>
 
-			<View style={styles.beerList}>
-				{/* 				<FlashList
+			{/* 				<FlashList
 					data={data}
 					estimatedItemSize={100}
 					keyExtractor={(item) => String(item._id)}
@@ -57,20 +56,19 @@ export default function Tab() {
 					)}
 				/> */}
 
-				<FlatList
-					data={data}
-					style={styles.beerList}
-					keyExtractor={(item) => String(item._id)}
-					renderItem={({ item }) => (
-						<View style={styles.item}>
-							<Text>Name: {item.name}</Text>
-							<Text>Brand: {item.brand}</Text>
-							<Text>Degree: {item.degree}</Text>
-							<Text>Packaging: {item.packaging}</Text>
-						</View>
-					)}
-				/>
-			</View>
+			<FlatList
+				data={data}
+				style={styles.beerList}
+				keyExtractor={(item) => String(item._id)}
+				renderItem={({ item }) => (
+					<View style={styles.item}>
+						<Text>Name: {item.name}</Text>
+						<Text>Brand: {item.brand}</Text>
+						<Text>Degree: {item.degree}</Text>
+						<Text>Packaging: {item.packaging}</Text>
+					</View>
+				)}
+			/>
 		</View>
 	);
 }
@@ -80,7 +78,7 @@ export const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
-		width: "100%",
+		marginTop: "2%",
 	},
 	beerList: {
 		width: "100%",
