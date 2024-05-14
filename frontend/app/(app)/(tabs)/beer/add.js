@@ -108,8 +108,12 @@ export default function BeerAdd() {
 
 	async function addBeer() {
 		// TODO: after the request - redirect to /beer/{new_beer_id}?; plus some modal about successful state
+
 		const data = new FormData();
-		data.append("photos", dataURItoBlob(image.uri));
+		if (Platform.OS == "web") {
+			// TODO: On phone its imposibble to upload an image
+			data.append("photos", dataURItoBlob(image.uri));
+		}
 		data.append("brand", b_brand);
 		data.append("name", b_name);
 		data.append("degree", b_degree);
@@ -124,7 +128,9 @@ export default function BeerAdd() {
 			const res = await req.json();
 
 			if (res.code == 201 && res.data._id) {
-				window.location.href = `/beer/${res.data._id}`;
+				// TODO: reditect using expo router
+				// window.location.href = `/beer/${res.data._id}`;
+				alert("Added");
 			} else {
 				alert(
 					"Beer was not added successfully. Please check your data and try again.",
@@ -198,9 +204,8 @@ export default function BeerAdd() {
 					) : (
 						false
 					)}
-
-					{image && <Image source={{ uri: image }} style={styles.image} />}
 				</View>
+				{image && <Image source={{ uri: image.uri }} style={styles.image} />}
 				<Button title="Add beer" color={colors.gold} onPress={addBeer} />
 			</View>
 		</View>

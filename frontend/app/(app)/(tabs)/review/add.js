@@ -7,7 +7,6 @@ import * as ImagePicker from "expo-image-picker";
 import DropDownPicker from "react-native-dropdown-picker";
 const DropdownTheme = require("@components/DropdownTheme");
 import { Platform } from "react-native";
-import RangeSlider, { Slider } from "react-native-range-slider-expo";
 
 export default function reviewAdd() {
 	const [b_name, setBName] = useState("");
