@@ -1,9 +1,16 @@
-import { StyleSheet, View, FlatList } from "react-native";
+import {
+	StyleSheet,
+	View,
+	FlatList,
+	Dimensions,
+	StatusBar,
+} from "react-native";
 import Text from "@components/Text";
 import Button from "@components/Button";
 import { colors } from "@components/style";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
+import { FlashList } from "@shopify/flash-list";
 
 export default function Tab() {
 	const [data, setData] = useState([]);
@@ -28,26 +35,42 @@ export default function Tab() {
 	return (
 		<View style={styles.container}>
 			<Button
-				title="Add Beer"
+				title="Add new beer"
 				color={colors.gold}
 				onPress={() => {
 					router.replace("/beer/add");
 				}}
 			/>
 
-			<FlatList
-				data={data}
-				style={styles.beerList}
-				keyExtractor={(item) => String(item._id)}
-				renderItem={({ item }) => (
-					<View style={styles.item}>
-						<Text>Name: {item.name}</Text>
-						<Text>Brand: {item.brand}</Text>
-						<Text>Degree: {item.degree}</Text>
-						<Text>Packaging: {item.packaging}</Text>
-					</View>
-				)}
-			/>
+			<View style={styles.beerList}>
+				{/* 				<FlashList
+					data={data}
+					estimatedItemSize={100}
+					keyExtractor={(item) => String(item._id)}
+					renderItem={({ item }) => (
+						<View style={styles.item}>
+							<Text>Name: {item.name}</Text>
+							<Text>Brand: {item.brand}</Text>
+							<Text>Degree: {item.degree}</Text>
+							<Text>Packaging: {item.packaging}</Text>
+						</View>
+					)}
+				/> */}
+
+				<FlatList
+					data={data}
+					style={styles.beerList}
+					keyExtractor={(item) => String(item._id)}
+					renderItem={({ item }) => (
+						<View style={styles.item}>
+							<Text>Name: {item.name}</Text>
+							<Text>Brand: {item.brand}</Text>
+							<Text>Degree: {item.degree}</Text>
+							<Text>Packaging: {item.packaging}</Text>
+						</View>
+					)}
+				/>
+			</View>
 		</View>
 	);
 }
@@ -57,12 +80,12 @@ export const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
-		marginTop: "5%",
+		width: "100%",
 	},
 	beerList: {
 		width: "100%",
 		paddingHorizontal: "15%",
-		marginTop: "5%",
+		marginTop: "2%",
 	},
 	item: {
 		borderColor: "gray",
