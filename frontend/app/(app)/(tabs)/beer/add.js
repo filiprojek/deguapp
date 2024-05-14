@@ -179,6 +179,7 @@ export default function BeerAdd() {
 					theme="DropdownTheme"
 					//searchable={true} //maybe we can use it later...
 				/>
+
 				<View style={styles.imageContainer}>
 					<Button
 						title="Open gallery"
@@ -187,14 +188,19 @@ export default function BeerAdd() {
 						textStyle={styles.imageTextButton}
 					/>
 
-					<Button
-						onPress={openCamera}
-						title="Open camera"
-						buttonStyle={styles.imageButton}
-						textStyle={styles.imageTextButton}
-					/>
+					{Platform.OS != "web" ? (
+						<Button
+							title="Open camera"
+							onPress={openCamera}
+							buttonStyle={styles.imageButton}
+							textStyle={styles.imageTextButton}
+						/>
+					) : (
+						false
+					)}
+
+					{image && <Image source={{ uri: image }} style={styles.image} />}
 				</View>
-				{image && <Image source={{ uri: image.uri }} style={styles.image} />}
 				<Button title="Add beer" color={colors.gold} onPress={addBeer} />
 			</View>
 		</View>
