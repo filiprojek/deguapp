@@ -1,5 +1,5 @@
 import { StyleSheet, TextInput, View, Image } from "react-native";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Button from "@components/Button";
 import Text from "@components/Text";
 import { colors } from "@components/style";
@@ -9,103 +9,320 @@ const DropdownTheme = require("@components/DropdownTheme");
 import { Platform } from "react-native";
 
 export default function reviewAdd() {
-	const [b_name, setBName] = useState("");
-	const [b_degree, setBDegree] = useState("");
-	const [b_packaging, setBPackaging] = useState(null);
-	const [b_brand, setBBrand] = useState("");
-	const [image, setImage] = useState(null);
+	// States for each dropdown
+	const [openFoam, setOpenFoam] = useState(false);
+	const [openBitterSweetness, setOpenBitterSweetness] = useState(false);
+	const [openTaste, setOpenTaste] = useState(false);
+	const [openPackaging, setOpenPackaging] = useState(false);
+	const [openSourness, setOpenSourness] = useState(false);
+	const [openAgain, setOpenAgain] = useState(false);
 
-	const [open, setOpen] = useState(false);
-	const [items, setItems] = useState([
-		{ label: "Tank beer", value: "tank" },
-		{ label: "Cask beer", value: "cask" },
-		{ label: "Glass bottle", value: "glass" },
-		{ label: "Can", value: "can" },
-		{ label: "PET bottle", value: "pet" },
+	// pěna
+	const [itemFoam, setFoamValue] = useState(null);
+	const [foam, setFoam] = useState([
+		{
+			label: "Bad",
+			value: "1",
+			icon: () => (
+				<Image
+					source={require("@assets/smileys/smiley-x-eyes.png")}
+					style={styles.iconStyle}
+				/>
+			),
+		},
+		{
+			label: "Medium",
+			value: "2",
+			icon: () => (
+				<Image
+					source={require("@assets/smileys/smiley-meh.png")}
+					style={styles.iconStyle}
+				/>
+			),
+		},
+		{
+			label: "Excelent",
+			value: "3",
+			icon: () => (
+				<Image
+					source={require("@assets/smileys/smiley.png")}
+					style={styles.iconStyle}
+				/>
+			),
+		},
 	]);
+
+	// hořkost / sladkost
+	const [itemBitter_sweetness, setBitter_sweetnessValue] = useState(null);
+	const [bitter_sweetness, setBitter_sweetness] = useState([
+		{
+			label: "Bad",
+			value: "1",
+			icon: () => (
+				<Image
+					source={require("@assets/smileys/smiley-x-eyes.png")}
+					style={styles.iconStyle}
+				/>
+			),
+		},
+		{
+			label: "Medium",
+			value: "2",
+			icon: () => (
+				<Image
+					source={require("@assets/smileys/smiley-meh.png")}
+					style={styles.iconStyle}
+				/>
+			),
+		},
+		{
+			label: "Excelent",
+			value: "3",
+			icon: () => (
+				<Image
+					source={require("@assets/smileys/smiley.png")}
+					style={styles.iconStyle}
+				/>
+			),
+		},
+	]);
+
+	//chuť
+	const [itemTaste, setTasteValue] = useState(null);
+	const [taste, setTaste] = useState([
+		{
+			label: "Disgust",
+			value: "1",
+			icon: () => (
+				<Image
+					source={require("@assets/smileys/smiley-blank.png")}
+					style={styles.iconStyle}
+				/>
+			),
+		},
+		{
+			label: "Not great, not terrible",
+			value: "2",
+			icon: () => (
+				<Image
+					source={require("@assets/smileys/smiley-nervous.png")}
+					style={styles.iconStyle}
+				/>
+			),
+		},
+		{
+			label: "Good",
+			value: "3",
+			icon: () => (
+				<Image
+					source={require("@assets/smileys/smiley-meh.png")}
+					style={styles.iconStyle}
+				/>
+			),
+		},
+		{
+			label: "Why not",
+			value: "4",
+			icon: () => (
+				<Image
+					source={require("@assets/smileys/smiley-wink.png")}
+					style={styles.iconStyle}
+				/>
+			),
+		},
+		{
+			label: "Excelent!",
+			value: "5",
+			icon: () => (
+				<Image
+					source={require("@assets/smileys/smiley.png")}
+					style={styles.iconStyle}
+				/>
+			),
+		},
+	]);
+
+	// packaging
+	const [itemPackaging, setPackagingValue] = useState(null);
+	const [packaging, setPackaging] = useState([
+		{
+			label: "Disgust",
+			value: "1",
+			icon: () => (
+				<Image
+					source={require("@assets/smileys/smiley-blank.png")}
+					style={styles.iconStyle}
+				/>
+			),
+		},
+		{
+			label: "Not great, not terrible",
+			value: "2",
+			icon: () => (
+				<Image
+					source={require("@assets/smileys/smiley-nervous.png")}
+					style={styles.iconStyle}
+				/>
+			),
+		},
+		{
+			label: "Good",
+			value: "3",
+			icon: () => (
+				<Image
+					source={require("@assets/smileys/smiley-meh.png")}
+					style={styles.iconStyle}
+				/>
+			),
+		},
+		{
+			label: "Why not",
+			value: "4",
+			icon: () => (
+				<Image
+					source={require("@assets/smileys/smiley-wink.png")}
+					style={styles.iconStyle}
+				/>
+			),
+		},
+		{
+			label: "Excelent!",
+			value: "5",
+			icon: () => (
+				<Image
+					source={require("@assets/smileys/smiley.png")}
+					style={styles.iconStyle}
+				/>
+			),
+		},
+	]);
+
+	//kyselost
+	const [itemSourness, setSournessValue] = useState(null);
+	const [sourness, setSourness] = useState([
+		{
+			label: "True",
+			value: true,
+			icon: () => (
+				<Image
+					source={require("@assets/smileys/smiley-blank.png")}
+					style={styles.iconStyle}
+				/>
+			),
+		},
+		{
+			label: "False",
+			value: false,
+			icon: () => (
+				<Image
+					source={require("@assets/smileys/smiley-nervous.png")}
+					style={styles.iconStyle}
+				/>
+			),
+		},
+	]);
+
+	//dal bych si znovu?
+	const [itemAgain, setAgainValue] = useState(null);
+	const [again, setAgain] = useState([
+		{
+			label: "Yes",
+			value: true,
+			icon: () => (
+				<Image
+					source={require("@assets/smileys/smiley.png")}
+					style={styles.iconStyle}
+				/>
+			),
+		},
+		{
+			label: "No",
+			value: false,
+			icon: () => (
+				<Image
+					source={require("@assets/smileys/smiley-x-eyes.png")}
+					style={styles.iconStyle}
+				/>
+			),
+		},
+	]);
+
+	//podmínky pro zavření ostatních dropdownů, pokud je jiný otevřený
+	const onOpenFoam = useCallback(() => {
+		setOpenBitterSweetness(false);
+		setOpenTaste(false);
+		setOpenPackaging(false);
+		setOpenSourness(false);
+		setOpenAgain(false);
+		setOpenFoam(true);
+	}, []);
+
+	const onOpenBitterSweetness = useCallback(() => {
+		setOpenFoam(false);
+		setOpenTaste(false);
+		setOpenPackaging(false);
+		setOpenSourness(false);
+		setOpenAgain(false);
+		setOpenBitterSweetness(true);
+	}, []);
+
+	const onOpenTaste = useCallback(() => {
+		setOpenFoam(false);
+		setOpenBitterSweetness(false);
+		setOpenPackaging(false);
+		setOpenSourness(false);
+		setOpenAgain(false);
+		setOpenTaste(true);
+	}, []);
+
+	const onOpenPackaging = useCallback(() => {
+		setOpenFoam(false);
+		setOpenBitterSweetness(false);
+		setOpenTaste(false);
+		setOpenSourness(false);
+		setOpenAgain(false);
+		setOpenPackaging(true);
+	}, []);
+
+	const onOpenSourness = useCallback(() => {
+		setOpenFoam(false);
+		setOpenBitterSweetness(false);
+		setOpenTaste(false);
+		setOpenPackaging(false);
+		setOpenAgain(false);
+		setOpenSourness(true);
+	}, []);
+
+	const onOpenAgain = useCallback(() => {
+		setOpenFoam(false);
+		setOpenBitterSweetness(false);
+		setOpenTaste(false);
+		setOpenPackaging(false);
+		setOpenSourness(false);
+		setOpenAgain(true);
+	}, []);
 
 	DropDownPicker.addTheme("DropdownTheme", DropdownTheme);
 	DropDownPicker.setTheme("DropdownTheme");
 
-	ImagePicker.getCameraPermissionsAsync(); //check if the user has granted permission to access the camera
-	const pickImage = async () => {
-		const permissionResult =
-			await ImagePicker.requestMediaLibraryPermissionsAsync();
-
-		if (permissionResult.granted === false) {
-			alert("You've refused to allow this appp to access your photos!");
-			return;
-		}
-
-		// No permissions request is necessary for launching the image library
-		const result = await ImagePicker.launchImageLibraryAsync({
-			mediaTypes: ImagePicker.MediaTypeOptions.Images,
-			allowsEditing: true,
-			aspect: [3, 4],
-			// quality: 1,
-		});
-
-		// Explore the result
-		console.log(result);
-
-		if (!result.canceled) {
-			setImage(result.assets[0].uri);
-		}
-	};
-
-	const openCamera = async () => {
-		// Ask the user for the permission to access the camera
-		const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
-
-		if (permissionResult.granted === false) {
-			alert("You've refused to allow this app to access your camera!");
-			return;
-		}
-
-		const result = await ImagePicker.launchCameraAsync();
-
-		// Explore the result
-		console.log(result);
-
-		if (!result.canceled) {
-			setImage(result.assets[0].uri);
-		}
-	};
-
-	function validateDegreeInput(text) {
-		let newText = "";
-		let numbers = "0123456789.";
-
-		for (var i = 0; i < text.length; i++) {
-			if (numbers.indexOf(text[i]) > -1) {
-				newText = newText + text[i];
-				setBDegree(newText);
-			} else {
-				// your call back function
-				alert("Please enter numbers only.");
-				setBDegree("");
-			}
-		}
-	}
-
 	async function addBeer() {
-		// TODO: after the request - redirect to /beer/{new_beer_id}?; plus some modal about successful state
-		const req = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/beer/add`, {
+		const req = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/review/add`, {
 			method: "POST",
 			credentials: "include",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
-				brand: b_brand,
-				name: b_name,
-				degree: b_degree,
-				packaging: b_packaging,
-				photos: null,
+				foam: itemFoam,
+				bitter_sweetness: itemBitter_sweetness,
+				taste: itemTaste,
+				packaging: itemPackaging,
+				sourness: itemSourness,
+				would_again: itemAgain,
 			}),
 		});
 		const res = await req.json();
 
 		if (res.code == 201 && res.data._id) {
-			window.location.href = `/beer/${res.data._id}`;
+			window.location.href = `/review/${res.data._id}`;
 		} else {
 			alert(
 				"Beer was not added successfully. Please check your data and try again.",
@@ -117,65 +334,112 @@ export default function reviewAdd() {
 		<View style={styles.container}>
 			<View style={styles.form}>
 				<Text style={styles.text}>
-					Spill your thoughts about the beer you just sipped!
+					How does your beer taste? Write a review!
 				</Text>
-				<TextInput
-					style={styles.input}
-					placeholder="Name"
-					value={b_name}
-					onChangeText={(text) => setBName(text)}
-					placeholderTextColor="#aaaaaa"
-				/>
-				<TextInput
-					style={styles.input}
-					placeholder="Brand"
-					value={b_brand}
-					onChangeText={(text) => setBBrand(text)}
-					placeholderTextColor="#aaaaaa"
-				/>
-				<TextInput
-					style={styles.input}
-					placeholder="Degree"
-					value={b_degree}
-					onChangeText={(text) => validateDegreeInput(text)}
-					placeholderTextColor="#aaaaaa"
-					keyboardType="numeric"
-					maxLength={3}
-				/>
-
+				<Text style={styles.dropdownText} zIndex={6000} zIndexInverse={1000}>
+					How does the foam look like?
+				</Text>
 				<DropDownPicker
-					open={open}
-					value={b_packaging}
-					items={items}
-					setOpen={setOpen}
-					setValue={setBPackaging}
-					setItems={setItems}
-					placeholder={"What are you drinking from?"}
+					open={openFoam}
+					onOpen={onOpenFoam}
+					value={itemFoam}
+					items={foam}
+					setOpen={setOpenFoam}
+					setValue={setFoamValue}
+					setItems={setFoam}
+					placeholder="Please select..."
 					theme="DropdownTheme"
-					//searchable={true} //maybe we can use it later...
+					zIndex={6000}
+					zIndexInverse={1000}
 				/>
-				{/* 				<View style={styles.imageContainer}>
-					<Button
-						title="Open gallery"
-						onPress={pickImage}
-						buttonStyle={styles.imageButton}
-						textStyle={styles.imageTextButton}
-					/>
+				<Text style={styles.dropdownText} zIndex={5000} zIndexInverse={2000}>
+					More bitter, or more sweet?
+				</Text>
+				<DropDownPicker
+					open={openBitterSweetness}
+					onOpen={onOpenBitterSweetness}
+					value={itemBitter_sweetness}
+					items={bitter_sweetness}
+					setOpen={setOpenBitterSweetness}
+					setValue={setBitter_sweetnessValue}
+					setItems={setBitter_sweetness}
+					placeholder="Please select..."
+					theme="DropdownTheme"
+					zIndex={5000}
+					zIndexInverse={2000}
+				/>
 
-					{Platform.OS != "web" ? (
-						<Button
-							onPress={openCamera}
-							title={"Open camera"}
-							buttonStyle={styles.imageButton}
-							textStyle={styles.imageTextButton}
-						/>
-					) : (
-						false
-					)}
+				<Text style={styles.dropdownText} zIndex={4000} zIndexInverse={3000}>
+					How does it taste?
+				</Text>
+				<DropDownPicker
+					open={openTaste}
+					onOpen={onOpenTaste}
+					value={itemTaste}
+					items={taste}
+					setOpen={setOpenTaste}
+					setValue={setTasteValue}
+					setItems={setTaste}
+					placeholder="Please select..."
+					theme="DropdownTheme"
+					zIndex={4000}
+					zIndexInverse={3000}
+				/>
 
-					{image && <Image source={{ uri: image }} style={styles.image} />}
-				</View> */}
-				<Button title="Add beer" color={colors.gold} onPress={addBeer} />
+				<Text style={styles.dropdownText} zIndex={5000} zIndexInverse={4000}>
+					How do you like the packaging?
+				</Text>
+				<DropDownPicker
+					open={openPackaging}
+					onOpen={onOpenPackaging}
+					value={itemPackaging}
+					items={packaging}
+					setOpen={setOpenPackaging}
+					setValue={setPackagingValue}
+					setItems={setPackaging}
+					placeholder="Please select..."
+					theme="DropdownTheme"
+					zIndex={5000}
+					zIndexInverse={4000}
+				/>
+
+				<Text style={styles.dropdownText} zIndex={4000} zIndexInverse={5000}>
+					Is it sour?
+				</Text>
+				<DropDownPicker
+					open={openSourness}
+					onOpen={onOpenSourness}
+					value={itemSourness}
+					items={sourness}
+					setOpen={setOpenSourness}
+					setValue={setSournessValue}
+					setItems={setSourness}
+					placeholder="Please select..."
+					theme="DropdownTheme"
+					zIndex={4000}
+					zIndexInverse={5000}
+				/>
+
+				<Text style={styles.dropdownText} zIndex={5000} zIndexInverse={6000}>
+					Would you drink it again?
+				</Text>
+				<DropDownPicker
+					open={openAgain}
+					onOpen={onOpenAgain}
+					value={itemAgain}
+					items={again}
+					setOpen={setOpenAgain}
+					setValue={setAgainValue}
+					setItems={setAgain}
+					placeholder="Please select..."
+					theme="DropdownTheme"
+					zIndex={5000}
+					zIndexInverse={6000}
+				/>
+
+				<View style={styles.buttonSend}>
+					<Button title="Add review" color={colors.gold} onPress={addBeer} />
+				</View>
 			</View>
 		</View>
 	);
@@ -189,9 +453,13 @@ const styles = StyleSheet.create({
 		display: "flex",
 	},
 	form: {
-		alignItems: "center",
-		gap: 15,
+		gap: 5,
 		width: "80%",
+	},
+	buttonSend: {
+		display: "flex",
+		alignItems: "center",
+		marginTop: "2%",
 	},
 	input: {
 		height: "auto",
@@ -228,5 +496,21 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		paddingBottom: "3%",
 		paddingTop: "10%",
+	},
+	iconStyle: {
+		width: 30,
+		height: 30,
+	},
+	dropdownContainer: {
+		width: "100%",
+	},
+	dropdownText: {
+		color: colors.white,
+		fontSize: 16,
+		paddingBottom: 1,
+		paddingTop: "1%",
+		display: "flex",
+		alignItems: "flex-start",
+		flexDirection: "column",
 	},
 });
