@@ -404,7 +404,7 @@ export default function reviewAdd() {
 					setItems={setPackaging}
 					placeholder="Please select..."
 					theme="DropdownTheme"
-					zIndex={5000}
+					zIndex={3000}
 					zIndexInverse={4000}
 				/>
 
@@ -421,7 +421,7 @@ export default function reviewAdd() {
 					setItems={setSourness}
 					placeholder="Please select..."
 					theme="DropdownTheme"
-					zIndex={4000}
+					zIndex={2000}
 					zIndexInverse={5000}
 				/>
 
@@ -438,7 +438,7 @@ export default function reviewAdd() {
 					setItems={setAgain}
 					placeholder="Please select..."
 					theme="DropdownTheme"
-					zIndex={5000}
+					zIndex={1000}
 					zIndexInverse={6000}
 				/>
 
