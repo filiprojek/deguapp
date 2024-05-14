@@ -3,3 +3,4 @@ dist/
 package-lock.json
 .env
 test-report.html
+uploads/

@@ -49,7 +49,7 @@ export default function BeerAdd() {
 		console.log(result);
 
 		if (!result.canceled) {
-			setImage(result.assets[0].uri);
+			setImage(result.assets[0]);
 		}
 	};
 
@@ -68,7 +68,7 @@ export default function BeerAdd() {
 		console.log(result);
 
 		if (!result.canceled) {
-			setImage(result.assets[0].uri);
+			setImage(result.assets[0]);
 		}
 	};
 
@@ -87,29 +87,54 @@ export default function BeerAdd() {
 			}
 		}
 	}
+	function dataURItoBlob(dataURI) {
+		// convert base64/URLEncoded data component to raw binary data held in a string
+		var byteString;
+		if (dataURI.split(",")[0].indexOf("base64") >= 0)
+			byteString = atob(dataURI.split(",")[1]);
+		else byteString = unescape(dataURI.split(",")[1]);
+
+		// separate out the mime component
+		var mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
+
+		// write the bytes of the string to a typed array
+		var ia = new Uint8Array(byteString.length);
+		for (var i = 0; i < byteString.length; i++) {
+			ia[i] = byteString.charCodeAt(i);
+		}
+
+		return new Blob([ia], { type: mimeString });
+	}
 
 	async function addBeer() {
 		// TODO: after the request - redirect to /beer/{new_beer_id}?; plus some modal about successful state
-		const req = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/beer/add`, {
-			method: "POST",
-			credentials: "include",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				brand: b_brand,
-				name: b_name,
-				degree: b_degree,
-				packaging: b_packaging,
-				photos: null,
-			}),
-		});
-		const res = await req.json();
+		const data = new FormData();
+		data.append("photos", dataURItoBlob(image.uri));
+		data.append("brand", b_brand);
+		data.append("name", b_name);
+		data.append("degree", b_degree);
+		data.append("packaging", "can");
 
-		if (res.code == 201 && res.data._id) {
-			window.location.href = `/beer/${res.data._id}`;
-		} else {
+		try {
+			const req = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/beer/add`, {
+				method: "POST",
+				credentials: "include",
+				body: data,
+			});
+			const res = await req.json();
+
+			if (res.code == 201 && res.data._id) {
+				window.location.href = `/beer/${res.data._id}`;
+			} else {
+				alert(
+					"Beer was not added successfully. Please check your data and try again.",
+				);
+			}
+		} catch (err) {
 			alert(
 				"Beer was not added successfully. Please check your data and try again.",
 			);
+			console.error(err);
 		}
 	}
 
@@ -169,7 +194,7 @@ export default function BeerAdd() {
 						textStyle={styles.imageTextButton}
 					/>
 				</View>
-				{image && <Image source={{ uri: image }} style={styles.image} />}
+				{image && <Image source={{ uri: image.uri }} style={styles.image} />}
 				<Button title="Add beer" color={colors.gold} onPress={addBeer} />
 			</View>
 		</View>
