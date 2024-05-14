@@ -43,7 +43,7 @@ export default function TabLayout() {
 					}}
 				/>
 				<Tabs.Screen
-					name="review"
+					name="review/index"
 					options={{
 						title: "Reviews",
 						tabBarIcon: ({ color }) => (
@@ -65,6 +65,10 @@ export default function TabLayout() {
 				<Tabs.Screen
 					name="beer/add"
 					options={{ href: null, title: "Add beer" }}
+				/>
+				<Tabs.Screen
+					name="review/add"
+					options={{ href: null, title: "Add review" }}
 				/>
 			</Tabs>
 		</View>
