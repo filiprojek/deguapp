@@ -38,6 +38,8 @@ export default function Tab() {
 		"Why not?",
 		"Excellent!",
 	];
+	const opt2 = ["Yes", "No"];
+	const sourness = ["Good", "Bad"];
 
 	return (
 		<View style={styles.container}>
@@ -47,10 +49,12 @@ export default function Tab() {
 				keyExtractor={(item) => String(item._id)}
 				renderItem={({ item }) => (
 					<View style={styles.item}>
-						<Text>Name: {item.name}</Text>
-						<Text>Brand: {item.brand}</Text>
-						<Text>Degree: {item.degree}</Text>
-						<Text>Packaging: {item.packaging}</Text>
+						<Text>Foam → {opt3[item.foam - 1]}</Text>
+						<Text>Bitter / Sweetness → {opt3[item.bitter_sweetness - 1]}</Text>
+						<Text>Taste → {opt5[item.taste - 1]}</Text>
+						<Text>Packaging → {opt5[item.packaging - 1]}</Text>
+						<Text>Sourness → {sourness[item.sourness - 1]}</Text>
+						<Text>Would again? → {opt2[item.would_again - 1]}</Text>
 					</View>
 				)}
 			/>
