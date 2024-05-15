@@ -1,4 +1,4 @@
-import { View, StyleSheet, FlatList } from "react-native";
+import { View, StyleSheet, FlatList, Image } from "react-native";
 import Text from "@components/Text";
 import Button from "@components/Button";
 import { colors } from "@components/style";
@@ -13,6 +13,8 @@ export default function Tab() {
 	useEffect(() => {
 		fetchData();
 	}, []);
+
+	const API_HOST = process.env.EXPO_PUBLIC_API_URL.replace("/api/v1", "");
 
 	async function fetchData() {
 		try {
@@ -70,13 +72,35 @@ export default function Tab() {
 				style={styles.reviewList}
 				keyExtractor={(item) => String(item._id)}
 				renderItem={({ item }) => (
-					<View style={styles.item}>
-						<Text>Foam → {opt3[item.foam - 1]}</Text>
-						<Text>Bitter / Sweetness → {opt3[item.bitter_sweetness - 1]}</Text>
-						<Text>Taste → {opt5[item.taste - 1]}</Text>
-						<Text>Packaging → {opt5[item.packaging - 1]}</Text>
-						<Text>Sourness → {sourness[item.sourness - 1]}</Text>
-						<Text>Would again? → {opt2[item.would_again - 1]}</Text>
+					<View style={styles.itemContainer}>
+						<View>
+							<Text>{item.beer.name}</Text>
+							<Text>{item.beer.brand}</Text>
+							<Text>{item.beer.degree}°</Text>
+							<Text>{item.beer.packaging}</Text>
+							<Image
+								source={
+									item.beer.imgs[0]
+										? {
+												uri: `${API_HOST}/public/uploads/${item.beer.imgs[0]}`,
+											}
+										: {
+												uri: "https://imagesvc.meredithcorp.io/v3/mm/image?url=https:%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F44%2F2020%2F09%2F29%2Flight-beer.jpg",
+											}
+								}
+								style={styles.itemImg}
+							/>
+						</View>
+						<View>
+							<Text>Foam → {opt3[item.foam - 1]}</Text>
+							<Text>
+								Bitter / Sweetness → {opt3[item.bitter_sweetness - 1]}
+							</Text>
+							<Text>Taste → {opt5[item.taste - 1]}</Text>
+							<Text>Packaging → {opt5[item.packaging - 1]}</Text>
+							<Text>Sourness → {sourness[item.sourness - 1]}</Text>
+							<Text>Would again? → {opt2[item.would_again - 1]}</Text>
+						</View>
 					</View>
 				)}
 			/>
@@ -96,11 +120,20 @@ export const styles = StyleSheet.create({
 		paddingHorizontal: "15%",
 		marginTop: "5%",
 	},
-	item: {
+	itemContainer: {
 		borderColor: "gray",
 		borderWidth: 1,
 		borderRadius: 10,
 		padding: 13,
 		marginBottom: "5%",
+		flex: 1,
+		flexDirection: "row",
+		justifyContent: "space-between",
+	},
+	itemImg: {
+		width: 150,
+		aspectRatio: 1,
+		resizeMode: "contain",
+		marginTop: "5%",
 	},
 });
