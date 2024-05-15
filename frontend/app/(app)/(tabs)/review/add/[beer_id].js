@@ -43,7 +43,7 @@ export default function reviewAdd() {
 			),
 		},
 		{
-			label: "Excelent",
+			label: "Excellent",
 			value: "3",
 			icon: () => (
 				<Image
@@ -78,7 +78,7 @@ export default function reviewAdd() {
 			),
 		},
 		{
-			label: "Excelent",
+			label: "Excellent",
 			value: "3",
 			icon: () => (
 				<Image
@@ -133,7 +133,7 @@ export default function reviewAdd() {
 			),
 		},
 		{
-			label: "Excelent!",
+			label: "Excellent!",
 			value: "5",
 			icon: () => (
 				<Image
@@ -188,7 +188,7 @@ export default function reviewAdd() {
 			),
 		},
 		{
-			label: "Excelent!",
+			label: "Excellent!",
 			value: "5",
 			icon: () => (
 				<Image

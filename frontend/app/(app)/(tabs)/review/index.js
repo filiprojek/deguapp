@@ -4,8 +4,11 @@ import Button from "@components/Button";
 import { colors } from "@components/style";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
+import { useAuth } from "@context/AuthContext";
 
 export default function Tab() {
+	const { authState } = useAuth();
+	const user = authState.user;
 	const [data, setData] = useState([]);
 	useEffect(() => {
 		fetchData();
@@ -17,8 +20,11 @@ export default function Tab() {
 				method: "GET",
 				credentials: "include",
 			});
-			const data = await res.json();
-			setData(data.data);
+			let data = await res.json();
+			// show only logged in user's data
+			data = data.data.filter((review) => review.user_id == user._id);
+			console.log("reviews", data);
+			setData(data);
 		} catch (err) {
 			console.error(err);
 			alert("Something went wrong");
