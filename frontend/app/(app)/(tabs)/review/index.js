@@ -30,17 +30,17 @@ export default function Tab() {
 			alert("Something went wrong");
 		}
 	}
+	const opt3 = ["Bad", "Medium", "Excellent!"];
+	const opt5 = [
+		"Disgust",
+		"Not great, not terrible",
+		"Good",
+		"Why not?",
+		"Excellent!",
+	];
 
 	return (
 		<View style={styles.container}>
-			<Button
-				title="Add Review"
-				color={colors.gold}
-				onPress={() => {
-					router.replace("/review/add");
-				}}
-			/>
-
 			<FlatList
 				data={data}
 				style={styles.reviewList}
