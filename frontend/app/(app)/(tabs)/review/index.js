@@ -23,6 +23,28 @@ export default function Tab() {
 			let data = await res.json();
 			// show only logged in user's data
 			data = data.data.filter((review) => review.user_id == user._id);
+
+			let beers = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/beer/get`, {
+				method: "GET",
+				credentials: "include",
+			});
+			beers = await beers.json();
+			beers = beers.data;
+			console.log(beers);
+
+			async function getBeerParam(search, beers) {
+				for (let i = 0; i < beers.length; i++) {
+					if (beers[i]._id == search) {
+						return beers[i];
+					}
+				}
+				return null;
+			}
+
+			data.forEach(async (el) => {
+				el.beer = await getBeerParam(el.beer_id, beers);
+			});
+
 			console.log("reviews", data);
 			setData(data);
 		} catch (err) {
