@@ -73,6 +73,15 @@ describe("POST /api/v1/review/add", () => {
 		expect(res.statusCode).toBe(400);
 	});
 
+	test("should drop 201 (missing note)", async () => {
+		const jwt = await login();
+		const body: any = { ...addExam };
+		delete body.note;
+		const res = await request.post(url).set("Cookie", jwt).send(body);
+
+		expect(res.statusCode).toBe(201);
+	})
+
 	test("should drop 201", async () => {
 		const jwt = await login();
 		const res = await request.post(url).set("Cookie", jwt).send(addExam);

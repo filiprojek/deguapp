@@ -20,7 +20,8 @@ export const add = yup.object({
 	packaging: yup.number().min(1).max(5).required(),
 	sourness: yup.boolean().required(),
 	would_again: yup.boolean().required(),
-	user_id: yup.string().notRequired()
+	user_id: yup.string().notRequired(),
+	note: yup.string().notRequired() 
 });
 export interface IReview extends yup.InferType<typeof add>, mongooseAddition {}
 export const addExam: IReview = {
@@ -31,6 +32,7 @@ export const addExam: IReview = {
 	packaging: 3,
 	sourness: false,
 	would_again: true,
+	note: "Pretty good beer"
 };
 
 // Remove
