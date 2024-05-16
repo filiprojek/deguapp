@@ -5,9 +5,9 @@ export const router = Router();
 
 router.use("/api/v1", api_v1);
 
-//router.get("*", (req: Request, res: Response) => {
-//  res.sendFile(path.join(__dirname, "../views/index.html"));
-//});
+router.get("*", (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, "../public/index.html"));
+});
 
 // 404
 router.use((req: Request, res: Response) => {
