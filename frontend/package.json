@@ -7,7 +7,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "build:web": "npx expo export"
+    "build:web": "npx expo export",
+    "format": "npx @biomejs/biome format --write ."
   },
   "dependencies": {
     "@expo/metro-runtime": "~3.2.1",
