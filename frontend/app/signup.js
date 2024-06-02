@@ -16,23 +16,28 @@ function SignupPage() {
 	const { onSignin } = useAuth();
 
 	async function signin() {
-		if (pass1 == pass2) {
-			const res = await onSignin(username, email, pass1);
-			if (res.error) {
-				if (res.msg.message == "validation error") {
-					alert(res.msg.data.message);
-				} else {
-					alert(res.msg.message);
-				}
-			}
-			if (!res.error) {
-				alert("You have been successfully registered. Please Log In");
-				router.replace("/login");
+		if (pass1 != pass2) {
+			alert("Passwords are not same!");
+			return;
+		}
+
+		const res = await onSignin(username, email, pass1);
+		const data = await res.json();
+
+		if (res.status == 400) {
+			if (data.message == "validation error") {
+				alert(data.data.message);
+			} else {
+				alert("Something went wrong");
 			}
 			return;
 		}
 
-		alert("Passwords are not same!");
+		if (res.status == 201) {
+			alert("You have been successfully registered. Please Log In");
+			router.replace("/login");
+			return;
+		}
 	}
 
 	return (
