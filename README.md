@@ -35,18 +35,18 @@ To get started with DeguApp, follow these steps:
 2. Install dependencies:
 
    ```bash
-   cd deguapp
+   # frontend
+   cd deguapp/frontend
+   npm install
+
+   # backend
+   cd deguapp/api
    npm install
    ```
 
 3. Will be added in the future:)
 
 5. Open the app in your browser or Android emulator and start exploring!
-
-## Contributing
-
-Contributions are welcome! If you'd like to contribute to DeguApp, please fork the repository and submit a pull request with your changes.
-Use the upstream of the project, which can be found at https:/git.filiprojek.cz/fr/deguapp. **GitHub repository is just a mirror!**
 
 ## Local builds
 ### Android
@@ -74,11 +74,23 @@ bundletool build-apks --bundle=./frontend/android/app/build/outputs/bundle/relea
 bundletool install-apks --apks=./deguapp.apks
 ```
 
-
-### Resources:
+#### Resources:
 
 - https://github.com/expo/eas-cli/issues/1300
 - https://reactnative.dev/docs/signed-apk-android#generating-the-release-aab
+
+### Server
+
+```bash
+cd api/
+npm i
+npm run build
+```
+
+## Contributing
+
+Contributions are welcome! If you'd like to contribute to DeguApp, please fork the repository and submit a pull request with your changes.
+Use the upstream of the project, which can be found at https:/git.filiprojek.cz/fr/deguapp. **GitHub repository is just a mirror!**
 
 ## License
 
