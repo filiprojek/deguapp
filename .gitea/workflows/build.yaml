@@ -1,0 +1,32 @@
+name: Build DeguApp backend
+
+on: pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js and TypeScript
+        uses: actions/setup-node@v1
+        with:
+          node-version: "20.14.0"
+
+      - name: npm install
+        working-directory: api/
+        run: |
+          npm install
+
+      - name: npm run build
+        working-directory: api/
+        run: |
+          npm run build --if-present
+
+      - name: npm run test
+        working-directory: api/
+        run: |
+          npm run test
+
