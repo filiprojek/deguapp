@@ -20,8 +20,12 @@ function LoginPage() {
 		}
 	}, [authState.authenticated]);
 
-	function login() {
-		onLogin(email, pass);
+	async function login() {
+		const res = await onLogin(email, pass);
+		if (res !== undefined && res.error === true) {
+			alert(res.msg);
+			return;
+		}
 	}
 
 	return (

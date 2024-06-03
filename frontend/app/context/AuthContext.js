@@ -90,7 +90,7 @@ export function AuthProvider({ children }) {
 			});
 
 			if (resUser.status != 200) {
-				throw Error("user does not have user data");
+				throw Error("Username or password is incorrect!");
 			}
 
 			const userData = await resUser.json();
@@ -104,7 +104,7 @@ export function AuthProvider({ children }) {
 			await storageUtil.setItem(TOKEN_KEY, loginData.data.jwt);
 		} catch (err) {
 			console.error("Failed to log in", err);
-			return { error: true, msg: err.res };
+			return { error: true, msg: err };
 		}
 	}
 
