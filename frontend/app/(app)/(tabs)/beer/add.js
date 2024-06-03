@@ -18,7 +18,7 @@ export default function BeerAdd() {
 	const [open, setOpen] = useState(false);
 	const [items, setItems] = useState([
 		{ label: "Tank beer", value: "tank" },
-		{ label: "Cask beer", value: "cask" },
+		{ label: "Keg beer", value: "keg" },
 		{ label: "Glass bottle", value: "glass" },
 		{ label: "Can", value: "can" },
 		{ label: "PET bottle", value: "pet" },

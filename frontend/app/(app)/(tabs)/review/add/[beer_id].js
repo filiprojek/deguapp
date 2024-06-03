@@ -19,7 +19,7 @@ export default function reviewAdd() {
 	const [openSourness, setOpenSourness] = useState(false);
 	const [openAgain, setOpenAgain] = useState(false);
 
-	// pěna
+	// foam
 	const [itemFoam, setFoamValue] = useState(null);
 	const [foam, setFoam] = useState([
 		{
@@ -54,11 +54,11 @@ export default function reviewAdd() {
 		},
 	]);
 
-	// hořkost / sladkost
+	// bitter / sweetness
 	const [itemBitter_sweetness, setBitter_sweetnessValue] = useState(null);
 	const [bitter_sweetness, setBitter_sweetness] = useState([
 		{
-			label: "Bad",
+			label: "Bitter",
 			value: "1",
 			icon: () => (
 				<Image
@@ -78,7 +78,7 @@ export default function reviewAdd() {
 			),
 		},
 		{
-			label: "Excellent",
+			label: "Sweet",
 			value: "3",
 			icon: () => (
 				<Image
@@ -89,7 +89,7 @@ export default function reviewAdd() {
 		},
 	]);
 
-	//chuť
+	// taste
 	const [itemTaste, setTasteValue] = useState(null);
 	const [taste, setTaste] = useState([
 		{
@@ -199,7 +199,7 @@ export default function reviewAdd() {
 		},
 	]);
 
-	//kyselost
+	// sourness
 	const [itemSourness, setSournessValue] = useState(null);
 	const [sourness, setSourness] = useState([
 		{
@@ -224,7 +224,7 @@ export default function reviewAdd() {
 		},
 	]);
 
-	//dal bych si znovu?
+	// would again
 	const [itemAgain, setAgainValue] = useState(null);
 	const [again, setAgain] = useState([
 		{
